@@ -1,0 +1,5 @@
+<Project>
+  <ItemGroup>
+    <PackageVersion Include="AwesomeAssertions" Version="8.0.1" />
+  </ItemGroup>
+</Project>
