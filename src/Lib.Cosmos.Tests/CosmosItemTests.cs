@@ -75,4 +75,17 @@ public class CosmosItemTests
 
         //assert
     }
+
+    [TestMethod, TestCategory("unit")]
+    public void ItemType_ShouldSerializeLowerSnakeCase()
+    {
+        //arrange
+        CosmosItem subject = new CosmosItem() { ItemType = "myType" };
+
+        //act
+        string actual = JsonConvert.SerializeObject(subject);
+
+        //assert
+        actual.Should().Contain("\"item_type\":\"myType\"");
+    }
 }

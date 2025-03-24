@@ -10,5 +10,6 @@ public class CosmosItem
     [JsonProperty("partition")]
     public string Partition { get; set; }
 
+    [JsonProperty("item_type")]
     public string ItemType { get; set; }
 }
