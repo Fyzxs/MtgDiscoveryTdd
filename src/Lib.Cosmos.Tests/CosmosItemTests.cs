@@ -51,4 +51,17 @@ public class CosmosItemTests
 
         //assert
     }
+
+    [TestMethod, TestCategory("unit")]
+    public void Partition_ShouldSerializeLowerCase()
+    {
+        //arrange
+        CosmosItem subject = new CosmosItem() { Partition = "myValue" };
+
+        //act
+        string actual = JsonConvert.SerializeObject(subject);
+
+        //assert
+        actual.Should().Contain("\"partition\":\"myValue\"");
+    }
 }
