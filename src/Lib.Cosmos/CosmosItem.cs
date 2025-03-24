@@ -18,4 +18,6 @@ public class CosmosItem
         get => _itemType ??= GetType().FullName;
         set => _itemType = value;
     }
+
+    public string CreatedDate { get; set; }
 }

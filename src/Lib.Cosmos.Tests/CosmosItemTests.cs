@@ -101,4 +101,15 @@ public class CosmosItemTests
         //assert
         _ = actual.Should().Be("Lib.Cosmos.CosmosItem");
     }
+
+    [TestMethod, TestCategory("unit")]
+    public void CreatedDate_ShouldExist()
+    {
+        //arrange
+
+        //act
+        string _ = new CosmosItem().CreatedDate;
+
+        //assert
+    }
 }
