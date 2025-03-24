@@ -15,7 +15,7 @@ public class CosmosItem
     [JsonProperty("item_type")]
     public string ItemType
     {
-        get => _itemType;
+        get => _itemType ??= GetType().FullName;
         set => _itemType = value;
     }
 }

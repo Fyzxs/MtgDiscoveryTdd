@@ -88,4 +88,17 @@ public class CosmosItemTests
         //assert
         _ = actual.Should().Contain("\"item_type\":\"myType\"");
     }
+
+    [TestMethod, TestCategory("unit")]
+    public void ItemType_ShouldReturnFqdn()
+    {
+        //arrange
+        CosmosItem subject = new();
+
+        //act
+        string actual = subject.ItemType;
+
+        //assert
+        _ = actual.Should().Be("Lib.Cosmos.CosmosItem");
+    }
 }
