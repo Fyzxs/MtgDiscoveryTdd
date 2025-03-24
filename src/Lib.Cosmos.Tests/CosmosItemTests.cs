@@ -11,7 +11,7 @@ public class CosmosItemTests
         //arrange
 
         //act
-        CosmosItem _ = new CosmosItem();
+        CosmosItem _ = new();
 
         //assert
     }
@@ -20,7 +20,7 @@ public class CosmosItemTests
     public void Id_ShouldExist()
     {
         //arrange
-        CosmosItem subject = new CosmosItem();
+        CosmosItem subject = new();
 
         //act
         string _ = subject.Id;
@@ -32,13 +32,13 @@ public class CosmosItemTests
     public void Id_ShouldSerializeLowerSnakeCase()
     {
         //arrange
-        CosmosItem subject = new CosmosItem { Id = "SomeValue" };
+        CosmosItem subject = new() { Id = "SomeValue" };
 
         //act
         string actual = JsonConvert.SerializeObject(subject);
 
         //assert
-        actual.Should().Contain("\"id\":\"SomeValue\"");
+        _ = actual.Should().Contain("\"id\":\"SomeValue\"");
     }
 
     [TestMethod, TestCategory("unit")]
@@ -56,13 +56,13 @@ public class CosmosItemTests
     public void Partition_ShouldSerializeLowerSnakeCase()
     {
         //arrange
-        CosmosItem subject = new CosmosItem() { Partition = "myValue" };
+        CosmosItem subject = new() { Partition = "myValue" };
 
         //act
         string actual = JsonConvert.SerializeObject(subject);
 
         //assert
-        actual.Should().Contain("\"partition\":\"myValue\"");
+        _ = actual.Should().Contain("\"partition\":\"myValue\"");
     }
 
     [TestMethod, TestCategory("unit")]
@@ -80,13 +80,12 @@ public class CosmosItemTests
     public void ItemType_ShouldSerializeLowerSnakeCase()
     {
         //arrange
-        CosmosItem subject = new CosmosItem() { ItemType = "myType" };
+        CosmosItem subject = new() { ItemType = "myType" };
 
         //act
         string actual = JsonConvert.SerializeObject(subject);
 
         //assert
-        actual.Should().Contain("\"item_type\":\"myType\"");
+        _ = actual.Should().Contain("\"item_type\":\"myType\"");
     }
-
 }
