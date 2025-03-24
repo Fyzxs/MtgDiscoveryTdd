@@ -13,4 +13,16 @@ public class CosmosItemTests
 
         //assert
     }
+
+    [TestMethod, TestCategory("unit")]
+    public void Id_ShouldExist()
+    {
+        //arrange
+        CosmosItem subject = new CosmosItem();
+
+        //act
+        string _ = subject.Id;
+
+        //assert
+    }
 }
