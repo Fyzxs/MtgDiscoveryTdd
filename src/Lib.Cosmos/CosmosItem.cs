@@ -4,6 +4,8 @@ namespace Lib.Cosmos;
 
 public class CosmosItem
 {
+    private string _itemType;
+
     [JsonProperty("id")]
     public string Id { get; set; }
 
@@ -11,5 +13,9 @@ public class CosmosItem
     public string Partition { get; set; }
 
     [JsonProperty("item_type")]
-    public string ItemType { get; set; }
+    public string ItemType
+    {
+        get => _itemType;
+        set => _itemType = value;
+    }
 }
