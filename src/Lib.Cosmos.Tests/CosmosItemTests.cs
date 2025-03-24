@@ -50,6 +50,5 @@ public class CosmosItemTests
         string _ = new CosmosItem().Partition;
 
         //assert
-
     }
 }
