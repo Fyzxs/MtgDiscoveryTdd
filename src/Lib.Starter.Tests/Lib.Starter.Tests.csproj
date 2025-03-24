@@ -10,12 +10,16 @@
     <ItemGroup>
         <PackageReference Include="coverlet.collector" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
-        <PackageReference Include="MSTest"  />
+        <PackageReference Include="MSTest" />
     </ItemGroup>
 
     <ItemGroup>
         <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
         <PackageReference Include="MSTest" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Lib.Cosmos\Lib.Cosmos.csproj" />
     </ItemGroup>
 
 </Project>
