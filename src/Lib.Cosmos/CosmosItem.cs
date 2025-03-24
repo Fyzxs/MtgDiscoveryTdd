@@ -20,5 +20,6 @@ public class CosmosItem
         set => _itemType = value;
     }
 
-    [JsonProperty("created_date")] public string CreatedDate { get; set; } = DateTime.UtcNow.ToString("o");
+    [JsonProperty("created_date")]
+    public string CreatedDate { get; set; } = DateTime.UtcNow.ToString("o");
 }
