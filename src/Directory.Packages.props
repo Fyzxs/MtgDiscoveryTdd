@@ -2,7 +2,5 @@
   <ItemGroup>
     <PackageVersion Include="AwesomeAssertions" Version="8.0.1" />
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageVersion Include="MSTest" Version="3.6.4" />
   </ItemGroup>
 </Project>

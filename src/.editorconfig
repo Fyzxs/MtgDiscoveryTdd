@@ -293,3 +293,15 @@ csharp_style_prefer_not_pattern = true:suggestion
 csharp_style_prefer_top_level_statements = true:silent
 csharp_style_prefer_primary_constructors = true:suggestion
 csharp_prefer_system_threading_lock = true:suggestion
+
+
+#####
+# Customizations
+#####
+# General
+[*.cs]
+dotnet_diagnostic.CA1716.severity = none # Don't use Lib
+
+# Tests
+[**Tests/*.cs]
+dotnet_diagnostic.CA1515.severity = none # Make internal
