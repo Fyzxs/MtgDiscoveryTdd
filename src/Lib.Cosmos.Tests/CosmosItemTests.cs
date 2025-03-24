@@ -112,4 +112,17 @@ public class CosmosItemTests
 
         //assert
     }
+
+    [TestMethod, TestCategory("unit")]
+    public void CreatedDate_ShouldSerializeLowerSnakeCase()
+    {
+        //arrange
+        CosmosItem subject = new() { CreatedDate = "myDate" };
+
+        //act
+        string actual = JsonConvert.SerializeObject(subject);
+
+        //assert
+        _ = actual.Should().Contain("\"created_date\":\"myDate\"");
+    }
 }
