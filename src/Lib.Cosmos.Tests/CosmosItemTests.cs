@@ -14,7 +14,3 @@ public class CosmosItemTests
         //assert
     }
 }
-
-public class CosmosItem
-{
-}
