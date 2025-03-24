@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace Lib.Cosmos.Tests;
@@ -139,5 +140,18 @@ public class CosmosItemTests
         //assert
         DateTime universalTime = DateTime.Parse(actual).ToUniversalTime();
         _ = universalTime.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(5));
+    }
+
+    [TestMethod, TestCategory("unit")]
+    public void Id_ShouldBeOverridable()
+    {
+        //arrange
+        PropertyInfo propertyInfo = typeof(CosmosItem).GetProperty("Id");
+
+        //act
+        bool actual = propertyInfo?.GetMethod is { IsVirtual: true, IsFinal: false };
+
+        //assert
+        _ = actual.Should().BeTrue();
     }
 }
