@@ -1,4 +1,6 @@
-﻿namespace Lib.Cosmos.Tests;
+﻿using Newtonsoft.Json;
+
+namespace Lib.Cosmos.Tests;
 
 [TestClass]
 public class CosmosItemTests
@@ -24,5 +26,18 @@ public class CosmosItemTests
         string _ = subject.Id;
 
         //assert
+    }
+
+    [TestMethod, TestCategory("unit")]
+    public void Id_ShouldSerializeProperly()
+    {
+        //arrange
+        CosmosItem subject = new CosmosItem { Id = "SomeValue" };
+
+        //act
+        string actual = JsonConvert.SerializeObject(subject);
+
+        //assert
+        actual.Should().Contain("\"id\":\"SomeValue\"");
     }
 }
