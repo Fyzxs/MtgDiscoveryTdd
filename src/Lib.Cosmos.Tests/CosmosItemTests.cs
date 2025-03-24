@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Lib.Cosmos.Tests;
 
@@ -124,5 +125,19 @@ public class CosmosItemTests
 
         //assert
         _ = actual.Should().Contain("\"created_date\":\"myDate\"");
+    }
+
+    [TestMethod, TestCategory("unit")]
+    public void CreatedDate_ShouldReturnUtcNowIso8601()
+    {
+        //arrange
+        CosmosItem subject = new();
+
+        //act
+        string actual = subject.CreatedDate;
+
+        //assert
+        DateTime universalTime = DateTime.Parse(actual).ToUniversalTime();
+        _ = universalTime.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(5));
     }
 }

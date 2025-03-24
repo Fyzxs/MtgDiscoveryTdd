@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Lib.Cosmos;
 
@@ -19,6 +20,5 @@ public class CosmosItem
         set => _itemType = value;
     }
 
-    [JsonProperty("created_date")]
-    public string CreatedDate { get; set; }
+    [JsonProperty("created_date")] public string CreatedDate { get; set; } = DateTime.UtcNow.ToString("o");
 }
