@@ -115,7 +115,7 @@
     <InternalsVisibleTo Include="Example$(MSBuildProjectName.Substring($(MSBuildProjectName.IndexOf('.'))))" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(IsTestProjectBuild)">
+  <ItemGroup Condition="$(IsTestProjectBuild) and Exists('$(TestSourceProjectName)\$(TestSourceProjectName).csproj')">
     <ProjectReference Include="..\$(TestSourceProjectName)\$(TestSourceProjectName).csproj" />
   </ItemGroup>
 
