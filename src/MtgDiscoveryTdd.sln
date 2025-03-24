@@ -10,19 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~ToolFIles", "~ToolFIles", 
 		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Starter.Tests", "Lib.Starter.Tests\Lib.Starter.Tests.csproj", "{F1EDC740-3985-B571-C8B3-19B120D596FD}"
-EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F1EDC740-3985-B571-C8B3-19B120D596FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1EDC740-3985-B571-C8B3-19B120D596FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1EDC740-3985-B571-C8B3-19B120D596FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1EDC740-3985-B571-C8B3-19B120D596FD}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

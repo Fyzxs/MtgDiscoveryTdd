@@ -1,6 +1,148 @@
 <Project>
   <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>warnings</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <IncludeSymbols>true</IncludeSymbols>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+    <ReportAnalyzer>true</ReportAnalyzer>
+    <AnalysisMode>All</AnalysisMode>
+    <Features>strict</Features>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <InvariantGlobalization>true</InvariantGlobalization>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- IDE0290 - use primary constrcutor -->
+    <!-- IDE2001 complains about single line if -->
+    <!-- IDE0005 gen docs to complain about unused usings - removed by code analysis -->
+    <!-- IDE0046 if return into ?: return-->
+    <NoWarn>$(NoWarn);IDE0290;IDE2001;IDE0005;IDE0046</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Set useful custom variables here -->
+    <IsExampleProject>false</IsExampleProject>
+    <IsExampleProject Condition="$(MSBuildProjectName.StartsWith('Example.'))">true</IsExampleProject>
+
+    <IsCliProject>false</IsCliProject>
+    <IsCliProject Condition="$(MSBuildProjectName.StartsWith('Cli.'))">true</IsCliProject>
+
+    <IsNotExampleProject>true</IsNotExampleProject>
+    <IsNotExampleProject Condition="$(IsExampleProject)">false</IsNotExampleProject>
+
+    <IsExampleCore>false</IsExampleCore>
+    <IsExampleCore Condition="$(MSBuildProjectName.Equals('Example.Core'))">true</IsExampleCore>
+
+    <IsExampleCli>false</IsExampleCli>
+    <IsExampleCli Condition="$(IsExampleProject) and !$(IsExampleCore)">true</IsExampleCli>
+
+    <IsTestConvienceBuild>false</IsTestConvienceBuild>
+    <IsTestConvienceBuild Condition="$(MSBuildProjectName.StartsWith('TestConvenience.'))">true</IsTestConvienceBuild>
+
+    <IsTestProjectBuild>false</IsTestProjectBuild>
+    <IsTestProjectBuild Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestProjectBuild>
+
+    <IsUnitTestBuild>false</IsUnitTestBuild>
+    <IsUnitTestBuild Condition="$(IsTestProjectBuild)">true</IsUnitTestBuild>
+
+    <IsTestBuild>false</IsTestBuild>
+    <IsTestBuild Condition="$(IsTestProjectBuild) or $(IsTestConvienceBuild)">true</IsTestBuild>
+
+    <IsNotTestBuild>true</IsNotTestBuild>
+    <IsNotTestBuild Condition="$(IsTestBuild)">false</IsNotTestBuild>
+
+    <IsSdkBuild>false</IsSdkBuild>
+    <IsSdkBuild Condition="$(MSBuildProjectName.StartsWith('Sdk.')) and !$(IsTestBuild)">true</IsSdkBuild>
+
+    <TestSourceProjectName Condition="!$(IsTestBuild)">NotATestProject</TestSourceProjectName>
+    <TestSourceProjectName Condition="$(IsTestBuild)">$(MSBuildProjectName.Substring(0,$(MSBuildProjectName.LastIndexOf('.'))))</TestSourceProjectName>
+
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsExampleProject)">
+    <!-- CA1848 - use logger delegates -->
+    <!-- CA1515 - make it internal -->
+    <!-- IDE0058 - Return type not used -->
+    <NoWarn>$(NoWarn);CA1848;CA1515;IDE0058</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsExampleCli)">
+    <OutputType>Exe</OutputType>
+    <!-- Exclude the project from analysis -->
+    <SonarQubeExclude>true</SonarQubeExclude>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(IsExampleCli)">
+    <ProjectReference Include="..\Example.Core\Example.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="$(IsExampleCli)">
+    <PackageReference Include="Premera.VAP.DSI.Internal.UniversalCore" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="$(IsTestBuild)">
+    <!-- IDE0060 - complaining about unused args -->
+    <NoWarn>$(NoWarn);IDE0060;CA1044</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsUnitTestBuild)">
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsSdkBuild)">
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <DebugType>embedded</DebugType>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(IsNotTestBuild)">
+    <InternalsVisibleTo Include="$(MSBuildProjectName).Tests" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsNotExampleProject) and $(IsNotTestBuild)">
+    <InternalsVisibleTo Include="Example$(MSBuildProjectName.Substring($(MSBuildProjectName.IndexOf('.'))))" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsTestProjectBuild)">
+    <ProjectReference Include="..\$(TestSourceProjectName)\$(TestSourceProjectName).csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsUnitTestBuild)">
+    <PackageReference Include="coverlet.collector">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Update="AwesomeAssertions.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="MSTest" />
+
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsTestBuild)">
+    <PackageReference Include="AwesomeAssertions"/>
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsUnitTestBuild)">
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsTestBuild)">
+    <Using Include="FluentAssertions" />
+  </ItemGroup>
+
 </Project>
