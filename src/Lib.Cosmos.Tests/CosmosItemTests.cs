@@ -40,4 +40,16 @@ public class CosmosItemTests
         //assert
         actual.Should().Contain("\"id\":\"SomeValue\"");
     }
+
+    [TestMethod, TestCategory("unit")]
+    public void Partition_ShouldExist()
+    {
+        //arrange
+
+        //act
+        string _ = new CosmosItem().Partition;
+
+        //assert
+
+    }
 }
