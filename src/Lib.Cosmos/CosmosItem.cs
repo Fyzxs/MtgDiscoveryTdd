@@ -11,7 +11,7 @@ public class CosmosItem
     public virtual string Id { get; set; }
 
     [JsonProperty("partition")]
-    public string Partition { get; set; }
+    public virtual string Partition { get; set; }
 
     [JsonProperty("item_type")]
     public string ItemType

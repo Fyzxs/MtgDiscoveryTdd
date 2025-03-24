@@ -154,4 +154,17 @@ public class CosmosItemTests
         //assert
         _ = actual.Should().BeTrue();
     }
+
+    [TestMethod, TestCategory("unit")]
+    public void Partition_ShouldBeOverridable()
+    {
+        //arrange
+        PropertyInfo propertyInfo = typeof(CosmosItem).GetProperty("Partition");
+
+        //act
+        bool actual = propertyInfo?.GetMethod is { IsVirtual: true, IsFinal: false };
+
+        //assert
+        _ = actual.Should().BeTrue();
+    }
 }
