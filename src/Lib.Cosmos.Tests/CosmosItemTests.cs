@@ -53,7 +53,7 @@ public class CosmosItemTests
     }
 
     [TestMethod, TestCategory("unit")]
-    public void Partition_ShouldSerializeLowerCase()
+    public void Partition_ShouldSerializeLowerSnakeCase()
     {
         //arrange
         CosmosItem subject = new CosmosItem() { Partition = "myValue" };
@@ -88,4 +88,5 @@ public class CosmosItemTests
         //assert
         actual.Should().Contain("\"item_type\":\"myType\"");
     }
+
 }
