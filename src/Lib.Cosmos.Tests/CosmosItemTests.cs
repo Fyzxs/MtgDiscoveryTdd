@@ -29,7 +29,7 @@ public class CosmosItemTests
     }
 
     [TestMethod, TestCategory("unit")]
-    public void Id_ShouldSerializeLowerCase()
+    public void Id_ShouldSerializeLowerSnakeCase()
     {
         //arrange
         CosmosItem subject = new CosmosItem { Id = "SomeValue" };
