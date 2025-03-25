@@ -41,6 +41,19 @@ public sealed class ToSystemTypeTests
         //assert
     }
 
+    [TestMethod, TestCategory("unit")]
+    public void ToSystemType_HaveAsSystemType()
+    {
+        //arrange
+        ToSystemType<string> subject = new TestToSystemType<string>();
+
+        //act
+        string actual = subject.AsSystemType();
+
+        //assert
+        _ = actual.Should().Be("");
+    }
+
     private sealed class TestToSystemType<T> : ToSystemType<T>
     { }
 }
