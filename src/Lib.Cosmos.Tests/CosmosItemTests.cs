@@ -181,7 +181,6 @@ public sealed class SetCardCosmosItem
         _ = new CardInfoCosmosItem();
 
         //assert
-
     }
 }
 
