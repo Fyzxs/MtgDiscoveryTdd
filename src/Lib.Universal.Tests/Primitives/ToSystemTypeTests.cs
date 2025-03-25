@@ -1,4 +1,5 @@
 ﻿using System;
+using Lib.Universal.Primitives;
 
 namespace Lib.Universal.Tests.Primitives;
 
@@ -11,7 +12,7 @@ public sealed class ToSystemTypeTests
         //arrange
 
         //act
-        Lib.Universal.Primitives.ToSystemType<string> _ = new TestToSystemType<string>();
+        ToSystemType<string> _ = new TestToSystemType<string>();
 
         //assert
     }
@@ -20,7 +21,7 @@ public sealed class ToSystemTypeTests
     public void ToSystemType_ShouldBeAbstract()
     {
         //arrange
-        Type subject = typeof(Lib.Universal.Primitives.ToSystemType<string>);
+        Type subject = typeof(ToSystemType<string>);
 
         //act
         bool actual = subject.IsAbstract;
@@ -35,11 +36,11 @@ public sealed class ToSystemTypeTests
         //arrange
 
         //act
-        Lib.Universal.Primitives.ToSystemType<string> _ = new TestToSystemType<string>();
+        ToSystemType<string> _ = new TestToSystemType<string>();
 
         //assert
     }
 
-    private sealed class TestToSystemType<T> : Lib.Universal.Primitives.ToSystemType<T>
+    private sealed class TestToSystemType<T> : ToSystemType<T>
     { }
 }
