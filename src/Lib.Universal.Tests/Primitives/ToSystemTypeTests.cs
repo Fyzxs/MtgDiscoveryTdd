@@ -81,6 +81,19 @@ public sealed class ToSystemTypeTests
         _ = actual.Should().BeTrue();
     }
 
+    [TestMethod, TestCategory("unit")]
+    public void ToSystemType_ShouldImplicitConvert()
+    {
+        //arrange
+        ToSystemType<string> subject = new TestToSystemType<string>("hello");
+
+        //act
+        string actual = subject;
+
+        //assert
+        _ = actual.Should().Be("hello");
+    }
+
     private sealed class TestToSystemType<T> : ToSystemType<T>
     {
         private readonly T _origin;
