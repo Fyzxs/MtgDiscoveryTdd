@@ -11,8 +11,11 @@ public sealed class ToSystemTypeTests
         //arrange
 
         //act
-        _ = new ToSystemType();
+        ToSystemType _ = new TestToSystemType();
 
         //assert
     }
+
+    private sealed class TestToSystemType : ToSystemType
+    { }
 }
