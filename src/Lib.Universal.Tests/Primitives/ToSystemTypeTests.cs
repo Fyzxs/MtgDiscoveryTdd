@@ -1,4 +1,4 @@
-﻿namespace Lib.Universal.Tests;
+﻿namespace Lib.Universal.Tests.Primitives;
 
 [TestClass]
 public class ToSystemTypeTests
@@ -14,8 +14,4 @@ public class ToSystemTypeTests
         //assert
 
     }
-}
-
-public class ToSystemType
-{
 }
