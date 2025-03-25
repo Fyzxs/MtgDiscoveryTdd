@@ -168,22 +168,3 @@ public sealed class CosmosItemTests
         _ = actual.Should().BeTrue();
     }
 }
-
-[TestClass]
-public sealed class SetCardCosmosItem
-{
-    [TestMethod, TestCategory("unit")]
-    public void CardInfoCosmosItem_ShouldExist()
-    {
-        //arrange
-
-        //act
-        _ = new CardInfoCosmosItem();
-
-        //assert
-    }
-}
-
-public sealed class CardInfoCosmosItem : CosmosItem
-{
-}
