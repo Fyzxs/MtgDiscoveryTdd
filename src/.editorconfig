@@ -305,3 +305,4 @@ dotnet_diagnostic.CA1716.severity = none # Don't use Lib
 # Tests
 [**Tests/*.cs]
 dotnet_diagnostic.CA1515.severity = none # Make internal
+dotnet_diagnostic.CA1707.severity = none # Underscores
