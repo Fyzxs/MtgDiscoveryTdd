@@ -83,9 +83,10 @@ public sealed class ToSystemTypeTests
 
     private sealed class TestToSystemType<T> : ToSystemType<T>
     {
-        public override T AsSystemType()
-        {
-            return default;
-        }
+        private readonly T _origin;
+
+        public TestToSystemType(T origin = default) => _origin = origin;
+
+        public override T AsSystemType() => _origin;
     }
 }
