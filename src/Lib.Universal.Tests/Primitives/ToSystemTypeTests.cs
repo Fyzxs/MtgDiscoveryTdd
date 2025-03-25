@@ -12,7 +12,7 @@ public sealed class ToSystemTypeTests
         //arrange
 
         //act
-        ToSystemType _ = new TestToSystemType();
+        ToSystemType _ = new TestToSystemType<string>();
 
         //assert
     }
@@ -30,6 +30,6 @@ public sealed class ToSystemTypeTests
         _ = actual.Should().BeTrue();
     }
 
-    private sealed class TestToSystemType : ToSystemType
+    private sealed class TestToSystemType<T> : ToSystemType
     { }
 }
