@@ -1,5 +1,5 @@
 ﻿namespace Lib.Universal.Primitives;
 
-public abstract class ToSystemType
+public abstract class ToSystemType<TType>
 {
 }
