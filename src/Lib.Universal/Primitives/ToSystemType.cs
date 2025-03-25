@@ -2,7 +2,7 @@
 
 public abstract class ToSystemType<TType>
 {
-    public string AsSystemType()
+    public TType AsSystemType()
     {
         return default;
     }

@@ -54,6 +54,19 @@ public sealed class ToSystemTypeTests
         _ = actual.Should().Be(null);
     }
 
+    [TestMethod, TestCategory("unit")]
+    public void AsSystemType_ShouldReturnGeneric()
+    {
+        //arrange
+        ToSystemType<int> subject = new TestToSystemType<int>();
+
+        //act
+        int actual = subject.AsSystemType();
+
+        //assert
+        _ = actual.Should().Be(0);
+    }
+
     private sealed class TestToSystemType<T> : ToSystemType<T>
     { }
 }
