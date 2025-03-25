@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Lib.Universal.Primitives;
 
 namespace Lib.Universal.Tests.Primitives;
@@ -67,6 +68,24 @@ public sealed class ToSystemTypeTests
         _ = actual.Should().Be(0);
     }
 
+    [TestMethod, TestCategory("unit")]
+    public void AsSystemType_AsSystemTypeIsAbstract()
+    {
+        //arrange
+        MethodInfo subject = typeof(ToSystemType<string>).GetMethod("AsSystemType")!;
+
+        //act
+        bool actual = subject.IsAbstract;
+
+        //assert
+        _ = actual.Should().BeTrue();
+    }
+
     private sealed class TestToSystemType<T> : ToSystemType<T>
-    { }
+    {
+        public override T AsSystemType()
+        {
+            return default;
+        }
+    }
 }
