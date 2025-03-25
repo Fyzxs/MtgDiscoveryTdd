@@ -4,6 +4,6 @@ public abstract class ToSystemType<TType>
 {
     public string AsSystemType()
     {
-        return "";
+        return default;
     }
 }

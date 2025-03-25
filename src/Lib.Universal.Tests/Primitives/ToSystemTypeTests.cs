@@ -51,7 +51,7 @@ public sealed class ToSystemTypeTests
         string actual = subject.AsSystemType();
 
         //assert
-        _ = actual.Should().Be("");
+        _ = actual.Should().Be(null);
     }
 
     private sealed class TestToSystemType<T> : ToSystemType<T>
