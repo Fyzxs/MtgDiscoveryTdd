@@ -3,7 +3,7 @@
 namespace Lib.Universal.Tests.Primitives;
 
 [TestClass]
-public class ToSystemTypeTests
+public sealed class ToSystemTypeTests
 {
     [TestMethod, TestCategory("unit")]
     public void ToSystemType_ShouldExist()
