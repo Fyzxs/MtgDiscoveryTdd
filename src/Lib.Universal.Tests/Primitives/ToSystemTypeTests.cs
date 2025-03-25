@@ -1,20 +1,27 @@
-﻿namespace Lib.Universal.Tests.Primitives;
+﻿using Lib.Universal.Primitives;
 
-[TestClass]
-public class ToSystemTypeTests
+namespace Lib.Universal.Tests.Primitives
 {
-    [TestMethod, TestCategory("unit")]
-    public void ToSystemType_ShouldExist()
+
+    [TestClass]
+    public class ToSystemTypeTests
     {
-        //arrange
+        [TestMethod, TestCategory("unit")]
+        public void ToSystemType_ShouldExist()
+        {
+            //arrange
 
-        //act
-        _ = new ToSystemType();
+            //act
+            _ = new ToSystemType();
 
-        //assert
+            //assert
+        }
     }
 }
 
-public class ToSystemType
+namespace Lib.Universal.Primitives
 {
+    public class ToSystemType
+    {
+    }
 }
