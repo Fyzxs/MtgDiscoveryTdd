@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Lib.Cosmos.Tests;
 
 [TestClass]
-public class CosmosItemTests
+public sealed class CosmosItemTests
 {
     [TestMethod, TestCategory("unit")]
     public void CosmosItem_ShouldExist()
