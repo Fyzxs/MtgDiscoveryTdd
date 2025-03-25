@@ -14,3 +14,7 @@ public class ToSystemTypeTests
         //assert
     }
 }
+
+public class ToSystemType
+{
+}
