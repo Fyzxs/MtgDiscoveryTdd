@@ -1,20 +1,18 @@
 ﻿using Lib.Universal.Primitives;
 
-namespace Lib.Universal.Tests.Primitives
+namespace Lib.Universal.Tests.Primitives;
+
+[TestClass]
+public class ToSystemTypeTests
 {
-
-    [TestClass]
-    public class ToSystemTypeTests
+    [TestMethod, TestCategory("unit")]
+    public void ToSystemType_ShouldExist()
     {
-        [TestMethod, TestCategory("unit")]
-        public void ToSystemType_ShouldExist()
-        {
-            //arrange
+        //arrange
 
-            //act
-            _ = new ToSystemType();
+        //act
+        _ = new ToSystemType();
 
-            //assert
-        }
+        //assert
     }
 }
