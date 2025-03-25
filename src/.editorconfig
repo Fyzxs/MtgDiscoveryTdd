@@ -301,6 +301,7 @@ csharp_prefer_system_threading_lock = true:suggestion
 # General
 [*.cs]
 dotnet_diagnostic.CA1716.severity = none # Don't use Lib
+dotnet_diagnostic.CA2225.severity = none # Method instead of implicitConvert
 
 # Tests
 [**Tests/**.cs]
