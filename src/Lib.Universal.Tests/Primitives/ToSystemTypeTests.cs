@@ -17,7 +17,6 @@ public sealed class ToSystemTypeTests
         //assert
     }
 
-
     [TestMethod, TestCategory("unit")]
     public void ToSystemType_ShouldBeAbstract()
     {
