@@ -94,6 +94,19 @@ public sealed class ToSystemTypeTests
         _ = actual.Should().Be("hello");
     }
 
+    [TestMethod, TestCategory("unit")]
+    public void ToString_ShouldStringOfValue()
+    {
+        //arrange
+        ToSystemType<string> subject = new TestToSystemType<string>("hello");
+
+        //act
+        string actual = subject.ToString();
+
+        //assert
+        _ = actual.Should().Be("hello");
+    }
+
     private sealed class TestToSystemType<T> : ToSystemType<T>
     {
         private readonly T _origin;
