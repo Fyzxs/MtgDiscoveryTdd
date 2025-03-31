@@ -17,4 +17,19 @@ public sealed class CosmosAccountNameTests
         //assert
 
     }
+
+    [TestMethod, TestCategory("unit")]
+    public void AsSystemType_ShouldReturnExpected()
+    {
+        //arrange
+        CosmosAccountName subject = new TestCosmosAccountName();
+
+        //act
+        string actual = subject.AsSystemType();
+
+        //assert
+        _ = actual.Should().Be("potato");
+    }
+
+    private sealed class TestCosmosAccountName : CosmosAccountName { }
 }
