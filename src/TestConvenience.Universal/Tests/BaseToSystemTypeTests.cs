@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestConvenience.Universal.Tests;
 
-[TestClass]
 public abstract class BaseToSystemTypeTests<TType, TSystemType>
 {
     [TestMethod, TestCategory("unit")]
