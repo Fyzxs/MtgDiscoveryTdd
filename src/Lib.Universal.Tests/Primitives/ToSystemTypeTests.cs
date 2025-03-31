@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using Lib.Universal.Primitives;
 
@@ -105,6 +107,22 @@ public sealed class ToSystemTypeTests
 
         //assert
         _ = actual.Should().Be("hello");
+    }
+
+    [TestMethod, TestCategory("unit")]
+    public void DebuggerDisplay_ShouldBeExpectedValue()
+    {
+        //arrange
+        Type type = typeof(ToSystemType<string>);
+        DebuggerDisplayAttribute attribute = (DebuggerDisplayAttribute)type
+            .GetCustomAttributes(typeof(DebuggerDisplayAttribute), false)
+            .FirstOrDefault();
+
+        //act
+        string actual = attribute?.Value;
+
+        //assert
+        _ = actual.Should().Be("[{GetType().Name}]:{AsSystemType()}");
     }
 
     private sealed class TestToSystemType<T> : ToSystemType<T>
