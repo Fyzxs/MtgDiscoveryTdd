@@ -5,8 +5,4 @@ namespace Lib.Cosmos.Tests.Primitives
 {
     [TestClass]
     public sealed class CosmosAccountNameTests : BaseToSystemTypeTests<CosmosAccountName, string>;
-
-    [TestClass]
-    public sealed class CosmosDatabaseNameTests : BaseToSystemTypeTests<CosmosDatabaseName, string>;
-
 }
