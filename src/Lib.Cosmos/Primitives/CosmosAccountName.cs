@@ -2,7 +2,7 @@
 
 namespace Lib.Cosmos.Primitives;
 
-public class CosmosAccountName : ToSystemType<string>
+public abstract class CosmosAccountName : ToSystemType<string>
 {
     public override string AsSystemType() => "potato";
 }

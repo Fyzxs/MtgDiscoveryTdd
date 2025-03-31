@@ -1,4 +1,5 @@
-﻿using Lib.Cosmos.Primitives;
+﻿using System;
+using Lib.Cosmos.Primitives;
 using Lib.Universal.Primitives;
 
 namespace Lib.Cosmos.Tests.Primitives;
@@ -12,7 +13,7 @@ public sealed class CosmosAccountNameTests
         //arrange
 
         //act
-        ToSystemType<string> _ = new CosmosAccountName();
+        ToSystemType<string> _ = new TestCosmosAccountName(null);
 
         //assert
 
@@ -42,6 +43,19 @@ public sealed class CosmosAccountNameTests
 
         //assert
         _ = actual.Should().Be("new_value");
+    }
+
+    [TestMethod, TestCategory("unit")]
+    public void CosmosAccountName_ShouldBeAbstract()
+    {
+        //arrange
+        Type subject = typeof(CosmosAccountName);
+
+        //act
+        bool actual = subject.IsAbstract;
+
+        //assert
+        _ = actual.Should().BeTrue();
     }
 
     private sealed class TestCosmosAccountName : CosmosAccountName
