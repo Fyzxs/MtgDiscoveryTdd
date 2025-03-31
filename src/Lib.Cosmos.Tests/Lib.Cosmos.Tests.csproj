@@ -3,7 +3,4 @@
     <ProjectReference Include="..\Lib.Universal\Lib.Universal.csproj" />
     <ProjectReference Include="..\TestConvenience.Universal\TestConvenience.Universal.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Primitives\" />
-  </ItemGroup>
 </Project>
