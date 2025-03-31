@@ -188,11 +188,3 @@ namespace Lib.Cosmos.Tests
         }
     }
 }
-
-namespace Lib.Cosmos.Primitives
-{
-    public class CosmosAccountName : ToSystemType<string>
-    {
-        public override string AsSystemType() => throw new NotImplementedException();
-    }
-}
