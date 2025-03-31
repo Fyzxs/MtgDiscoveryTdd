@@ -8,44 +8,6 @@ namespace Lib.Cosmos.Tests.Primitives;
 public sealed class CosmosAccountNameTests
 {
     [TestMethod, TestCategory("unit")]
-    public void CosmosAccountName_ShouldExist()
-    {
-        //arrange
-
-        //act
-        ToSystemType<string> _ = new TestCosmosAccountName(null);
-
-        //assert
-
-    }
-
-    [TestMethod, TestCategory("unit")]
-    public void AsSystemType_ShouldReturnExpected()
-    {
-        //arrange
-        CosmosAccountName subject = new TestCosmosAccountName("potato");
-
-        //act
-        string actual = subject.AsSystemType();
-
-        //assert
-        _ = actual.Should().Be("potato");
-    }
-
-    [TestMethod, TestCategory("unit")]
-    public void AsSystemType_ShouldReturnProvided()
-    {
-        //arrange
-        CosmosAccountName subject = new TestCosmosAccountName("new_value");
-
-        //act
-        string actual = subject.AsSystemType();
-
-        //assert
-        _ = actual.Should().Be("new_value");
-    }
-
-    [TestMethod, TestCategory("unit")]
     public void CosmosAccountName_ShouldBeAbstract()
     {
         //arrange
@@ -58,12 +20,16 @@ public sealed class CosmosAccountNameTests
         _ = actual.Should().BeTrue();
     }
 
-    private sealed class TestCosmosAccountName : CosmosAccountName
+    [TestMethod, TestCategory("unit")]
+    public void CosmosAccountName_ShouldDeriveFromToSystemType()
     {
-        private readonly string _origin;
+        //arrange
+        Type subject = typeof(CosmosAccountName);
 
-        public TestCosmosAccountName(string origin) => _origin = origin;
+        //act
+        bool actual = subject.IsSubclassOf(typeof(ToSystemType<string>));
 
-        public override string AsSystemType() => _origin;
+        //assert
+        _ = actual.Should().BeTrue();
     }
 }
