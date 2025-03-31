@@ -10,5 +10,10 @@ namespace Lib.Cosmos.Tests.Primitives
     [TestClass]
     public sealed class CosmosDatabaseNameTests : BaseToSystemTypeTests<CosmosDatabaseName, string>;
 
+}
+
+namespace Lib.Cosmos.Primitives
+{
+
     public abstract class CosmosDatabaseName : ToSystemType<string>;
 }
