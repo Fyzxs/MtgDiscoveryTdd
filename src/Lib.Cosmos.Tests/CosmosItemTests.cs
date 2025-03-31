@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using Lib.Cosmos.Primitives;
-using Lib.Universal.Primitives;
 using Newtonsoft.Json;
 
 namespace Lib.Cosmos.Tests
@@ -169,22 +167,6 @@ namespace Lib.Cosmos.Tests
 
             //assert
             _ = actual.Should().BeTrue();
-        }
-    }
-
-    [TestClass]
-    public sealed class CosmosAccountNameTests
-    {
-        [TestMethod, TestCategory("unit")]
-        public void CosmosAccountName_ShouldExist()
-        {
-            //arrange
-
-            //act
-            ToSystemType<string> _ = new CosmosAccountName();
-
-            //assert
-
         }
     }
 }
