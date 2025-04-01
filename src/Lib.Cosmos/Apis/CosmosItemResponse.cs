@@ -10,6 +10,6 @@ public abstract class CosmosItemResponse<T> : ToSystemType<T>
 
     public bool IsSuccessfulStatusCode()
     {
-        return false;
+        return true;
     }
 }

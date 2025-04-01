@@ -100,6 +100,19 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
         //assert
     }
 
+    [TestMethod, TestCategory("unit")]
+    public void IsSuccessfulStatusCode_ShouldReturnTrueFor200()
+    {
+        //arrange
+        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, HttpStatusCode.OK);
+
+        //act
+        bool actual = subject.IsSuccessfulStatusCode();
+
+        //assert
+        _ = actual.Should().BeTrue();
+    }
+
     private sealed class TestCosmosItemResponse<T> : CosmosItemResponse<T>
     {
         public TestCosmosItemResponse(T origin, HttpStatusCode status)
