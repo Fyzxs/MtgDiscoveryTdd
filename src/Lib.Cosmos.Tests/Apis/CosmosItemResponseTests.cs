@@ -96,6 +96,7 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
         }
 
         public override T Value { get; }
+        public override HttpStatusCode StatusCode { get; }
 
         public override T AsSystemType() => throw new System.NotImplementedException();
     }
