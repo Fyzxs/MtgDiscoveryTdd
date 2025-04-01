@@ -3,7 +3,7 @@
 namespace Lib.Cosmos.Tests.Adapters;
 
 [TestClass]
-public class CosmosContainerUpsertAdapterTests
+public sealed class CosmosContainerUpsertAdapterTests
 {
     [TestMethod, TestCategory("unit")]
     public void Should_Exist()

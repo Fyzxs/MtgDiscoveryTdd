@@ -6,7 +6,7 @@ using TestConvenience.Universal.Tests;
 namespace Lib.Cosmos.Tests.Apis;
 
 [TestClass]
-public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<object>, object>
+public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<object>, object>
 {
     [TestMethod, TestCategory("unit")]
     public void Value_PropertyShouldExist()
