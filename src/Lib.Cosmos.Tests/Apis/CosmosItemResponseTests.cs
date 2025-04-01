@@ -114,6 +114,19 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
     }
 
     [TestMethod, TestCategory("unit")]
+    public void IsSuccessfulStatusCode_ShouldReturnTrueFor299()
+    {
+        //arrange
+        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, (HttpStatusCode)299);
+
+        //act
+        bool actual = subject.IsSuccessfulStatusCode();
+
+        //assert
+        _ = actual.Should().BeTrue();
+    }
+
+    [TestMethod, TestCategory("unit")]
     public void IsSuccessfulStatusCode_ShouldReturnFalseFor199()
     {
         //arrange
