@@ -35,7 +35,7 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
     }
 
     [TestMethod, TestCategory("unit")]
-    public void Value_ShouldBeVirtual()
+    public void Value_ShouldBeAbstract()
     {
         //arrange
         PropertyInfo propertyInfo = typeof(CosmosItemResponse<object>).GetProperty("Value");
