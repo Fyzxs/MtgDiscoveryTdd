@@ -14,6 +14,5 @@ public class CosmosContainerUpsertAdapterTests
         ICosmosContainerUpsertAdapter _ = new CosmosContainerUpsertAdapter();
 
         //assert
-
     }
 }
