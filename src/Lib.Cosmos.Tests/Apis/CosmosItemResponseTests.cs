@@ -12,7 +12,7 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
     public void Value_PropertyShouldExist()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null);
+        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, HttpStatusCode.OK);
 
         //act
         object _ = subject.Value;
@@ -52,7 +52,7 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
     public void StatusCode_PropertyShouldExist()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null);
+        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, HttpStatusCode.OK);
 
         //act
         HttpStatusCode _ = subject.StatusCode;
@@ -88,10 +88,23 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
         _ = actual.Should().BeTrue("Value property should be abstract");
     }
 
+    [TestMethod, TestCategory("unit")]
+    public void IsSuccessfulStatusCode_ShouldExist()
+    {
+        //arrange
+        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, HttpStatusCode.OK);
+
+        //act
+        bool _ = subject.IsSuccessfulStatusCode();
+
+        //assert
+    }
+
     private sealed class TestCosmosItemResponse<T> : CosmosItemResponse<T>
     {
-        public TestCosmosItemResponse(T origin)
+        public TestCosmosItemResponse(T origin, HttpStatusCode status)
         {
+            StatusCode = status;
             Value = origin;
         }
 
