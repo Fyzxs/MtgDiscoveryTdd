@@ -1,4 +1,6 @@
-﻿namespace Lib.Cosmos.Tests.Adapters;
+﻿using Lib.Cosmos.Adapters;
+
+namespace Lib.Cosmos.Tests.Adapters;
 
 [TestClass]
 public class CosmosContainerUpsertAdapterTests
@@ -14,14 +16,4 @@ public class CosmosContainerUpsertAdapterTests
         //assert
 
     }
-}
-
-public class CosmosContainerUpsertAdapter : ICosmosContainerUpsertAdapter
-{
-    public void Foo() => throw new System.NotImplementedException();
-}
-
-public interface ICosmosContainerUpsertAdapter
-{
-    void Foo();
 }
