@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Lib.Cosmos;
 
-public class CosmosItem
+public /* cosmos required */ class CosmosItem
 {
     private string _itemType;
 
