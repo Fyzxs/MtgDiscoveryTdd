@@ -11,7 +11,7 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
     public void Value_PropertyShouldExist()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>();
+        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null);
 
         //act
         object _ = subject.Value;
@@ -49,6 +49,12 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
 
     private sealed class TestCosmosItemResponse<T> : CosmosItemResponse<T>
     {
+        public TestCosmosItemResponse(T origin)
+        {
+            Value = origin;
+        }
+
+        public override T Value { get; }
 
         public override T AsSystemType() => throw new System.NotImplementedException();
     }
