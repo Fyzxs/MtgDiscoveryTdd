@@ -82,10 +82,10 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
         PropertyInfo propertyInfo = typeof(CosmosItemResponse<object>).GetProperty("StatusCode");
 
         //act
-        bool isVirtual = propertyInfo!.GetMethod!.IsAbstract && propertyInfo.GetMethod.IsFinal is false;
+        bool actual = propertyInfo!.GetMethod!.IsAbstract && propertyInfo.GetMethod.IsFinal is false;
 
         //assert
-        _ = isVirtual.Should().BeTrue("Value property should be abstract");
+        _ = actual.Should().BeTrue("Value property should be abstract");
     }
 
     private sealed class TestCosmosItemResponse<T> : CosmosItemResponse<T>
