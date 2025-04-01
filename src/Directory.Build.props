@@ -138,12 +138,13 @@
     <PackageReference Include="AwesomeAssertions"/>
   </ItemGroup>
 
-  <ItemGroup Condition="$(IsUnitTestBuild)">
-    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+  <ItemGroup Condition="$(IsTestConvienceBuild)">
+    <PackageReference Include="MSTest.TestFramework" />
   </ItemGroup>
+
 
   <ItemGroup Condition="$(IsTestBuild)">
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="FluentAssertions" />
   </ItemGroup>
-
 </Project>

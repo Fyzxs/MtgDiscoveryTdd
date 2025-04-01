@@ -1,4 +1,5 @@
-﻿using Lib.Universal.Primitives;
+﻿using System;
+using Lib.Universal.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestConvenience.Universal.Tests;
