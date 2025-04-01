@@ -34,8 +34,22 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
         _ = hasSetter.Should().BeFalse("Value property should not have a setter");
     }
 
+    [TestMethod, TestCategory("unit")]
+    public void Value_ShouldBeVirtual()
+    {
+        //arrange
+        PropertyInfo propertyInfo = typeof(CosmosItemResponse<object>).GetProperty("Value");
+
+        //act
+        bool isVirtual = propertyInfo?.GetMethod?.IsVirtual == true && !propertyInfo.GetMethod.IsFinal;
+
+        //assert
+        _ = isVirtual.Should().BeTrue("Value property should be virtual");
+    }
+
     private sealed class TestCosmosItemResponse<T> : CosmosItemResponse<T>
     {
+
         public override T AsSystemType() => throw new System.NotImplementedException();
     }
 }
