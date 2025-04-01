@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Net;
+using System.Reflection;
 using Lib.Cosmos.Apis;
 using TestConvenience.Universal.Tests;
 
@@ -45,6 +46,18 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
 
         //assert
         _ = isVirtual.Should().BeTrue("Value property should be virtual");
+    }
+
+    [TestMethod, TestCategory("unit")]
+    public void StatusCode_PropertyShouldExist()
+    {
+        //arrange
+        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null);
+
+        //act
+        HttpStatusCode _ = subject.StatusCode;
+
+        //assert
     }
 
     private sealed class TestCosmosItemResponse<T> : CosmosItemResponse<T>
