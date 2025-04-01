@@ -60,6 +60,21 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
         //assert
     }
 
+    [TestMethod, TestCategory("unit")]
+    public void StatusCode_PropertyShouldBeGetOnly()
+    {
+        //arrange
+        PropertyInfo propertyInfo = typeof(CosmosItemResponse<object>).GetProperty("StatusCode");
+
+        //act
+        bool hasGetter = propertyInfo?.CanRead == true;
+        bool hasSetter = propertyInfo?.CanWrite == true;
+
+        //assert
+        _ = hasGetter.Should().BeTrue("Value property should have a getter");
+        _ = hasSetter.Should().BeFalse("Value property should not have a setter");
+    }
+
     private sealed class TestCosmosItemResponse<T> : CosmosItemResponse<T>
     {
         public TestCosmosItemResponse(T origin)
