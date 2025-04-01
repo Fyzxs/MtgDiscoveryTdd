@@ -1,5 +1,2 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <Folder Include="Primitives\" />
-  </ItemGroup>
 </Project>
