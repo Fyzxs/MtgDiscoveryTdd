@@ -10,8 +10,6 @@ public abstract class CosmosItemResponse<T> : ToSystemType<T>
 
     public bool IsSuccessfulStatusCode()
     {
-        if ((int)StatusCode == 300) return false;
-        if ((int)StatusCode == 500) return false;
-        return 200 <= (int)StatusCode;
+        return 200 <= (int)StatusCode && (int)StatusCode <= 299;
     }
 }
