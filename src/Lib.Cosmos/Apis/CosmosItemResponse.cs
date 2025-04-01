@@ -1,6 +1,8 @@
-﻿namespace Lib.Cosmos.Apis;
+﻿using Lib.Universal.Primitives;
 
-public abstract class CosmosItemResponse<T>
+namespace Lib.Cosmos.Apis;
+
+public abstract class CosmosItemResponse<T> : ToSystemType<T>
 {
     public T Value { get; set; }
 }
