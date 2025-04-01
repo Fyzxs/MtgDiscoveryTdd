@@ -82,7 +82,7 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
         PropertyInfo propertyInfo = typeof(CosmosItemResponse<object>).GetProperty("StatusCode");
 
         //act
-        bool isVirtual = propertyInfo!.GetMethod!.IsVirtual && propertyInfo.GetMethod.IsFinal is false;
+        bool isVirtual = propertyInfo!.GetMethod!.IsAbstract && propertyInfo.GetMethod.IsFinal is false;
 
         //assert
         _ = isVirtual.Should().BeTrue("Value property should be virtual");
