@@ -1,5 +1,8 @@
 ﻿<Project Sdk="MSTest.Sdk/3.6.4">
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Cosmos" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Lib.Universal\Lib.Universal.csproj" />
     <ProjectReference Include="..\TestConvenience.Universal\TestConvenience.Universal.csproj" />
   </ItemGroup>
