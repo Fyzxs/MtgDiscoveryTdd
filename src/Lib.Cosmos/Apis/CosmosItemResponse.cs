@@ -8,8 +8,5 @@ public abstract class CosmosItemResponse<T> : ToSystemType<T>
     public abstract T Value { get; }
     public abstract HttpStatusCode StatusCode { get; }
 
-    public bool IsSuccessfulStatusCode()
-    {
-        return 200 <= (int)StatusCode && (int)StatusCode <= 299;
-    }
+    public bool IsSuccessfulStatusCode() => 200 <= (int)StatusCode && (int)StatusCode <= 299;
 }
