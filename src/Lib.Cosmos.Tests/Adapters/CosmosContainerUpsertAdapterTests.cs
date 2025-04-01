@@ -1,4 +1,5 @@
 ﻿using Lib.Cosmos.Adapters;
+using Lib.Cosmos.Apis;
 using TestConvenience.Universal.Tests;
 
 namespace Lib.Cosmos.Tests.Adapters;
@@ -21,9 +22,5 @@ public class CosmosContainerUpsertAdapterTests
 
 [TestClass]
 public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<object>, object>
-{
-}
-
-public abstract class CosmosItemResponse<T>
 {
 }
