@@ -12,4 +12,6 @@ public abstract class CosmosItemResponse<T> : ToSystemType<T>
     public bool IsSuccessfulStatusCode() => 200 <= (int)StatusCode && (int)StatusCode <= 299;
 
     public bool IsNotSuccessfulStatusCode() => IsSuccessfulStatusCode() is false;
+
+    public override T AsSystemType() => throw new System.NotImplementedException();
 }

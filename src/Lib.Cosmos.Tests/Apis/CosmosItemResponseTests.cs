@@ -191,6 +191,19 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
         _ = actual.Should().BeFalse();
     }
 
+    [TestMethod, TestCategory("unit")]
+    public void CosmosItemResponse_ShouldImplementAsSystemType()
+    {
+        //arrange
+        MethodInfo methodInfo = typeof(CosmosItemResponse<object>).GetMethod("AsSystemType");
+
+        //act
+        bool isOverride = methodInfo?.DeclaringType == typeof(CosmosItemResponse<object>);
+
+        //assert
+        _ = isOverride.Should().BeTrue("CosmosItemResponse should implement the AsSystemType method from its superclass");
+    }
+
     private sealed class TestCosmosItemResponse<T> : CosmosItemResponse<T>
     {
         public TestCosmosItemResponse(T origin, HttpStatusCode status)
