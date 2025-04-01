@@ -13,5 +13,5 @@ public abstract class CosmosItemResponse<T> : ToSystemType<T>
 
     public bool IsNotSuccessfulStatusCode() => IsSuccessfulStatusCode() is false;
 
-    public override T AsSystemType() => throw new System.NotImplementedException();
+    public override T AsSystemType() => Value;
 }

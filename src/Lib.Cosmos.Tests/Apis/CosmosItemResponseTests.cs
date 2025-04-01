@@ -204,6 +204,20 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
         _ = isOverride.Should().BeTrue("CosmosItemResponse should implement the AsSystemType method from its superclass");
     }
 
+    [TestMethod, TestCategory("unit")]
+    public void AsSystemType_ShouldReturnValue()
+    {
+        //arrange
+        object obj = new();
+        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(obj, HttpStatusCode.OK);
+
+        //act
+        object actual = subject.AsSystemType();
+
+        //assert
+        _ = actual.Should().BeSameAs(obj);
+    }
+
     private sealed class TestCosmosItemResponse<T> : CosmosItemResponse<T>
     {
         public TestCosmosItemResponse(T origin, HttpStatusCode status)
