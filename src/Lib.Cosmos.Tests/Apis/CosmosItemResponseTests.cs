@@ -45,7 +45,7 @@ public class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<
         bool isVirtual = propertyInfo!.GetMethod!.IsAbstract && propertyInfo.GetMethod.IsFinal is false;
 
         //assert
-        _ = isVirtual.Should().BeTrue("Value property should be virtual");
+        _ = isVirtual.Should().BeTrue("Value property should be abstract");
     }
 
     [TestMethod, TestCategory("unit")]
