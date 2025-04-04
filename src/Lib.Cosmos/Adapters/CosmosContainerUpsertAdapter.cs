@@ -8,8 +8,6 @@ namespace Lib.Cosmos.Adapters;
 
 public sealed class CosmosContainerUpsertAdapter : ICosmosContainerUpsertAdapter
 {
-    public void Foo() => throw new System.NotImplementedException();
-
     public async Task<OpResponse<T>> UpsertItemAsync<T>([NotNull] Container container, T item)
     {
         ItemResponse<T> itemResponse = await container.UpsertItemAsync(item).ConfigureAwait(false);
