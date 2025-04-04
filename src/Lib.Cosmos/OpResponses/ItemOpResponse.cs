@@ -12,5 +12,5 @@ public sealed class ItemOpResponse<T> : OpResponse<T>
 
     public override T Value => _itemResponse.Resource;
 
-    public override HttpStatusCode StatusCode => throw new System.NotImplementedException();
+    public override HttpStatusCode StatusCode => _itemResponse.StatusCode;
 }

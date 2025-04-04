@@ -36,4 +36,23 @@ public sealed class ItemOpResponseTests
         //assert
         _ = actual.Should().BeSameAs(resourceResult);
     }
+
+    [TestMethod, TestCategory("unit")]
+    public void StatusCode_ShouldReturnProvidedCode()
+    {
+        //arrange
+        object resourceResult = new();
+        ItemResponseFake itemResponseFake = new()
+        {
+            ResourceResult = resourceResult,
+            StatusCodeResult = HttpStatusCode.MethodNotAllowed
+        };
+        ItemOpResponse<object> subject = new(itemResponseFake);
+
+        //act
+        object actual = subject.StatusCode;
+
+        //assert
+        _ = actual.Should().Be(HttpStatusCode.MethodNotAllowed);
+    }
 }
