@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Lib.Cosmos.Adapters;
 using Lib.Cosmos.Apis;
@@ -71,6 +72,8 @@ public sealed class CosmosContainerUpsertAdapterTests
 
 public sealed class LoggerFake : ILogger
 {
+    public StringBuilder Logs { get; set; }
+
     public async Task LogAsync<TState>(LogLevel logLevel, TState state, Exception exception,
         Func<TState, Exception, string> formatter)
     {
@@ -78,7 +81,7 @@ public sealed class LoggerFake : ILogger
         Log(logLevel, state, exception, formatter);
     }
 
-    public void Log<TState>(LogLevel logLevel, TState state, Exception exception, Func<TState, Exception, string> formatter) => throw new NotImplementedException();
+    public void Log<TState>(LogLevel logLevel, TState state, Exception exception, Func<TState, Exception, string> formatter) => Logs.AppendLine(formatter(state, exception));
 
     public bool IsEnabled(LogLevel logLevel) => true;
 }
