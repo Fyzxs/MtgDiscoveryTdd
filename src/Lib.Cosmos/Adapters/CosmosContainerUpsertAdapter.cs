@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Lib.Cosmos.Adapters;
 
-public sealed class CosmosContainerUpsertAdapter : ICosmosContainerUpsertAdapter
+internal sealed class CosmosContainerUpsertAdapter : ICosmosContainerUpsertAdapter
 {
     private readonly ILogger _logger;
 
@@ -24,7 +24,7 @@ public sealed class CosmosContainerUpsertAdapter : ICosmosContainerUpsertAdapter
     }
 }
 
-public static partial class CosmosContainerUpsertAdapterLoggerExtensions
+internal static partial class CosmosContainerUpsertAdapterLoggerExtensions
 {
     [LoggerMessage(
         Level = LogLevel.Information,
