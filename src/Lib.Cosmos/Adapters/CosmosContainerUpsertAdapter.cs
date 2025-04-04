@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lib.Cosmos.Apis;
+using Lib.Cosmos.Apis.Adapters;
+using Lib.Cosmos.Apis.OpResponses;
 using Lib.Cosmos.OpResponses;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;

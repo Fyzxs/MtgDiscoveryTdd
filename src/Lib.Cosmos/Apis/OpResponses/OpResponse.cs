@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Lib.Universal.Primitives;
 
-namespace Lib.Cosmos.Apis;
+namespace Lib.Cosmos.Apis.OpResponses;
 
 /// <summary>
 /// Represents a response from a Cosmos DB item operation.

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using System.Reflection;
-using Lib.Cosmos.Apis;
+using Lib.Cosmos.Apis.OpResponses;
 using TestConvenience.Universal.Tests;
 
 namespace Lib.Cosmos.Tests.Apis;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Lib.Cosmos.Apis;
 using Newtonsoft.Json;
 
 namespace Lib.Cosmos.Tests;

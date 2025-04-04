@@ -3,6 +3,8 @@ using System.Net;
 using System.Threading.Tasks;
 using Lib.Cosmos.Adapters;
 using Lib.Cosmos.Apis;
+using Lib.Cosmos.Apis.Adapters;
+using Lib.Cosmos.Apis.OpResponses;
 using Lib.Cosmos.Tests.Fakes;
 
 namespace Lib.Cosmos.Tests.Adapters;

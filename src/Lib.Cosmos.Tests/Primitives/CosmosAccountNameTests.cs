@@ -1,4 +1,4 @@
-﻿using Lib.Cosmos.Primitives;
+﻿using Lib.Cosmos.Apis.Ids;
 using TestConvenience.Universal.Tests;
 
 namespace Lib.Cosmos.Tests.Primitives;

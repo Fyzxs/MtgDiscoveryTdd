@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
+using Lib.Cosmos.Apis.OpResponses;
 using Microsoft.Azure.Cosmos;
 
-namespace Lib.Cosmos.Apis;
+namespace Lib.Cosmos.Apis.Adapters;
 
 public interface ICosmosContainerUpsertAdapter
 {

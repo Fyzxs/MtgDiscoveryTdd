@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Lib.Cosmos;
+namespace Lib.Cosmos.Apis;
 
 public /* cosmos required */ class CosmosItem
 {
