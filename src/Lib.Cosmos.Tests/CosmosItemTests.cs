@@ -102,7 +102,7 @@ public sealed class CosmosItemTests
         string actual = subject.ItemType;
 
         //assert
-        _ = actual.Should().Be("Lib.Cosmos.CosmosItem");
+        _ = actual.Should().Be("Lib.Cosmos.Apis.CosmosItem");
     }
 
     [TestMethod, TestCategory("unit")]
