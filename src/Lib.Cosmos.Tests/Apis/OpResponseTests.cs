@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Reflection;
 using Lib.Cosmos.Apis;
+using Lib.Cosmos.OpResponses;
 using Lib.Cosmos.Tests.Fakes;
-using Microsoft.Azure.Cosmos;
 using TestConvenience.Universal.Tests;
 
 namespace Lib.Cosmos.Tests.Apis;
@@ -246,15 +246,4 @@ public sealed class ItemOpResponseTests
 
         //assert
     }
-}
-
-public sealed class ItemOpResponse<T> : OpResponse<T>
-{
-    public ItemOpResponse(ItemResponse<T> itemResponse)
-    {
-    }
-
-    public override T Value => throw new System.NotImplementedException();
-
-    public override HttpStatusCode StatusCode => throw new System.NotImplementedException();
 }
