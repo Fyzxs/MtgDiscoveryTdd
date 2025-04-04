@@ -25,7 +25,9 @@
     <!-- IDE2001 complains about single line if -->
     <!-- IDE0005 gen docs to complain about unused usings - removed by code analysis -->
     <!-- IDE0046 if return into ?: return-->
-    <NoWarn>$(NoWarn);IDE0290;IDE2001;IDE0005;IDE0046</NoWarn>
+    <!-- CA1065 don't throw notimplemented from getter -->
+    <!-- CA1822 no static -->
+    <NoWarn>$(NoWarn);IDE0290;IDE2001;IDE0005;IDE0046;CA1065;CA1822</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>
