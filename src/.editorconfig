@@ -302,8 +302,21 @@ csharp_prefer_system_threading_lock = true:suggestion
 [*.cs]
 dotnet_diagnostic.CA1716.severity = none # Don't use Lib
 dotnet_diagnostic.CA2225.severity = none # Method instead of implicitConvert
+dotnet_diagnostic.IDE0290.severity = none # use primary constructor
+dotnet_diagnostic.IDE2001.severity = none # doens't like single line if
+dotnet_diagnostic.IDE0005.severity = none # gen docs to complain about unused usings - removed by code analysis
+dotnet_diagnostic.IDE0046.severity = none # wants ternary
+dotnet_diagnostic.CA1065.severity = none # No notimplemented from getter
+dotnet_diagnostic.CA1822.severity = none # wants static methods
+dotnet_diagnostic.CA1062.severity = none # wants [NotNull] all over
 
 # Tests
 [**Tests/**.cs]
 dotnet_diagnostic.CA1515.severity = none # Make internal
 dotnet_diagnostic.CA1707.severity = none # Underscores
+
+# Example Projects
+[**/Example.*/**.cs]
+dotnet_diagnostic.CA1848.severity = none # use logger delegates
+dotnet_diagnostic.CA1515.severity = none # make internal
+dotnet_diagnostic.IDE0058.severity = none # return type not used
