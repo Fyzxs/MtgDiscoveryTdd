@@ -1,4 +1,5 @@
-﻿using Lib.Cosmos.OpResponses;
+﻿using System.Net;
+using Lib.Cosmos.OpResponses;
 using Lib.Cosmos.Tests.Fakes;
 
 namespace Lib.Cosmos.Tests.OpResponses;
@@ -15,5 +16,24 @@ public sealed class ItemOpResponseTests
         _ = new ItemOpResponse<object>(new ItemResponseFake());
 
         //assert
+    }
+
+    [TestMethod, TestCategory("unit")]
+    public void Value_ShouldReturnProvidedResult()
+    {
+        //arrange
+        object resourceResult = new();
+        ItemResponseFake itemResponseFake = new()
+        {
+            ResourceResult = resourceResult,
+            StatusCodeResult = HttpStatusCode.MethodNotAllowed
+        };
+        ItemOpResponse<object> subject = new(itemResponseFake);
+
+        //act
+        object actual = subject.Value;
+
+        //assert
+        _ = actual.Should().BeSameAs(resourceResult);
     }
 }

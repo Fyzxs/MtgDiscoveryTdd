@@ -6,11 +6,11 @@ namespace Lib.Cosmos.OpResponses;
 
 public sealed class ItemOpResponse<T> : OpResponse<T>
 {
-    public ItemOpResponse(ItemResponse<T> itemResponse)
-    {
-    }
+    private readonly ItemResponse<T> _itemResponse;
 
-    public override T Value => throw new System.NotImplementedException();
+    public ItemOpResponse(ItemResponse<T> itemResponse) => _itemResponse = itemResponse;
+
+    public override T Value => _itemResponse.Resource;
 
     public override HttpStatusCode StatusCode => throw new System.NotImplementedException();
 }
