@@ -19,7 +19,7 @@ public sealed class ItemOpResponseTests
     }
 
     [TestMethod, TestCategory("unit")]
-    public void Value_ShouldReturnProvidedResult()
+    public void Value_ShouldReturnProvidedValue()
     {
         //arrange
         object resourceResult = new();
