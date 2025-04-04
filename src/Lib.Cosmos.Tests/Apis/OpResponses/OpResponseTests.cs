@@ -3,7 +3,7 @@ using System.Reflection;
 using Lib.Cosmos.Apis.OpResponses;
 using TestConvenience.Universal.Tests;
 
-namespace Lib.Cosmos.Tests.Apis;
+namespace Lib.Cosmos.Tests.Apis.OpResponses;
 
 [TestClass]
 public sealed class OpResponseTests : BaseToSystemTypeTests<OpResponse<object>, object>
