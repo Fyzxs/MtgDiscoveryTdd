@@ -7,6 +7,5 @@ namespace Lib.Cosmos.Adapters;
 
 public interface ICosmosContainerUpsertAdapter
 {
-    void Foo();
     Task<OpResponse<T>> UpsertItemAsync<T>([NotNull] Container container, T item);
 }
