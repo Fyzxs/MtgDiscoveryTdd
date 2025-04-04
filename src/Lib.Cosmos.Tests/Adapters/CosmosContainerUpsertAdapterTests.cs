@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using Lib.Cosmos.Adapters;
+using Lib.Cosmos.Apis;
 using Lib.Cosmos.Tests.Fakes;
-using Microsoft.Azure.Cosmos;
 
 namespace Lib.Cosmos.Tests.Adapters;
 
@@ -23,18 +24,22 @@ public sealed class CosmosContainerUpsertAdapterTests
     public async Task UpsertItemAsync_ShouldCallUpsertItemAsyncOnContainer()
     {
         //arrange
-        ItemResponseFake<CosmosItem> upsertItemAsyncResponse = new();
+        CosmosItem cosmosItem = new();
+        ItemResponseFake<CosmosItem> upsertItemAsyncResponse = new()
+        {
+            ResourceResult = cosmosItem,
+            StatusCodeResult = HttpStatusCode.MethodNotAllowed
+        };
         ContainerFake<CosmosItem> containerFake = new()
         {
             UpsertItemAsyncResponse = upsertItemAsyncResponse
         };
-        CosmosItem cosmosItem = new();
         CosmosContainerUpsertAdapter subject = new();
 
         //act
-        ItemResponse<CosmosItem> actual = await subject.UpsertItemAsync<CosmosItem>(containerFake, cosmosItem).ConfigureAwait(false);
+        OpResponse<CosmosItem> actual = await subject.UpsertItemAsync<CosmosItem>(containerFake, cosmosItem).ConfigureAwait(false);
 
         //assert
-        _ = actual.Should().BeSameAs(upsertItemAsyncResponse);
+        _ = actual.Value.Should().BeSameAs(cosmosItem);
     }
 }
