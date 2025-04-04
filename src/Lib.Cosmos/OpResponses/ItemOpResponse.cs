@@ -4,7 +4,7 @@ using Microsoft.Azure.Cosmos;
 
 namespace Lib.Cosmos.OpResponses;
 
-public sealed class ItemOpResponse<T> : OpResponse<T>
+internal sealed class ItemOpResponse<T> : OpResponse<T>
 {
     private readonly ItemResponse<T> _itemResponse;
 
