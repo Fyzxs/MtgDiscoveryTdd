@@ -27,7 +27,8 @@
     <!-- IDE0046 if return into ?: return-->
     <!-- CA1065 don't throw notimplemented from getter -->
     <!-- CA1822 no static -->
-    <NoWarn>$(NoWarn);IDE0290;IDE2001;IDE0005;IDE0046;CA1065;CA1822</NoWarn>
+    <!-- CA1062 make sure not null first -->
+    <NoWarn>$(NoWarn);IDE0290;IDE2001;IDE0005;IDE0046;CA1065;CA1822;CA1062</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>
