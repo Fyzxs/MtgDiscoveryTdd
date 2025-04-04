@@ -1,8 +1,6 @@
 ﻿using System.Net;
 using System.Reflection;
 using Lib.Cosmos.Apis;
-using Lib.Cosmos.OpResponses;
-using Lib.Cosmos.Tests.Fakes;
 using TestConvenience.Universal.Tests;
 
 namespace Lib.Cosmos.Tests.Apis;
@@ -230,20 +228,5 @@ public sealed class OpResponseTests : BaseToSystemTypeTests<OpResponse<object>, 
 
         public override T Value { get; }
         public override HttpStatusCode StatusCode { get; }
-    }
-}
-
-[TestClass]
-public sealed class ItemOpResponseTests
-{
-    [TestMethod, TestCategory("unit")]
-    public void Should_Exist()
-    {
-        //arrange
-
-        //act
-        _ = new ItemOpResponse<object>(new ItemResponseFake());
-
-        //assert
     }
 }
