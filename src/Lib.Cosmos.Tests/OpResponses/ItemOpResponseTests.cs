@@ -13,7 +13,7 @@ public sealed class ItemOpResponseTests
         //arrange
 
         //act
-        _ = new ItemOpResponse<object>(new ItemResponseFake());
+        _ = new ItemOpResponse<object>(new ItemResponseFake<object>());
 
         //assert
     }
@@ -23,7 +23,7 @@ public sealed class ItemOpResponseTests
     {
         //arrange
         object resourceResult = new();
-        ItemResponseFake itemResponseFake = new()
+        ItemResponseFake<object> itemResponseFake = new()
         {
             ResourceResult = resourceResult,
             StatusCodeResult = HttpStatusCode.MethodNotAllowed
@@ -42,7 +42,7 @@ public sealed class ItemOpResponseTests
     {
         //arrange
         object resourceResult = new();
-        ItemResponseFake itemResponseFake = new()
+        ItemResponseFake<object> itemResponseFake = new()
         {
             ResourceResult = resourceResult,
             StatusCodeResult = HttpStatusCode.MethodNotAllowed

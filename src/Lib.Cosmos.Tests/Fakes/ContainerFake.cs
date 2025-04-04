@@ -9,9 +9,9 @@ using Microsoft.Azure.Cosmos.Scripts;
 
 namespace Lib.Cosmos.Tests.Fakes;
 
-public sealed class ContainerFake : Container
+public sealed class ContainerFake<TType> : Container
 {
-    public ItemResponse<object> UpsertItemAsyncResponse { get; init; }
+    public ItemResponse<TType> UpsertItemAsyncResponse { get; init; }
     public int UpsertItemAsyncInvokeCount { get; private set; }
 
     public override Task<ItemResponse<T>> UpsertItemAsync<T>(T item, PartitionKey? partitionKey = null,
