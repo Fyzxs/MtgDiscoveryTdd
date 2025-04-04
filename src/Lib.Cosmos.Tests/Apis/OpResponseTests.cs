@@ -6,13 +6,13 @@ using TestConvenience.Universal.Tests;
 namespace Lib.Cosmos.Tests.Apis;
 
 [TestClass]
-public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemResponse<object>, object>
+public sealed class OpResponseTests : BaseToSystemTypeTests<OpResponse<object>, object>
 {
     [TestMethod, TestCategory("unit")]
     public void Value_PropertyShouldExist()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, HttpStatusCode.OK);
+        OpResponse<object> subject = new TestOpResponse<object>(null, HttpStatusCode.OK);
 
         //act
         object _ = subject.Value;
@@ -24,7 +24,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void Value_PropertyShouldBeGetOnly()
     {
         //arrange
-        PropertyInfo propertyInfo = typeof(CosmosItemResponse<object>).GetProperty("Value");
+        PropertyInfo propertyInfo = typeof(OpResponse<object>).GetProperty("Value");
 
         //act
         bool hasGetter = propertyInfo?.CanRead == true;
@@ -39,7 +39,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void Value_ShouldBeAbstract()
     {
         //arrange
-        PropertyInfo propertyInfo = typeof(CosmosItemResponse<object>).GetProperty("Value");
+        PropertyInfo propertyInfo = typeof(OpResponse<object>).GetProperty("Value");
 
         //act
         bool actual = propertyInfo!.GetMethod!.IsAbstract && propertyInfo.GetMethod.IsFinal is false;
@@ -52,7 +52,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void StatusCode_PropertyShouldExist()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, HttpStatusCode.OK);
+        OpResponse<object> subject = new TestOpResponse<object>(null, HttpStatusCode.OK);
 
         //act
         HttpStatusCode _ = subject.StatusCode;
@@ -64,7 +64,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void StatusCode_PropertyShouldBeGetOnly()
     {
         //arrange
-        PropertyInfo propertyInfo = typeof(CosmosItemResponse<object>).GetProperty("StatusCode");
+        PropertyInfo propertyInfo = typeof(OpResponse<object>).GetProperty("StatusCode");
 
         //act
         bool hasGetter = propertyInfo?.CanRead == true;
@@ -79,7 +79,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void StatusCode_ShouldBeAbstract()
     {
         //arrange
-        PropertyInfo propertyInfo = typeof(CosmosItemResponse<object>).GetProperty("StatusCode");
+        PropertyInfo propertyInfo = typeof(OpResponse<object>).GetProperty("StatusCode");
 
         //act
         bool actual = propertyInfo!.GetMethod!.IsAbstract && propertyInfo.GetMethod.IsFinal is false;
@@ -92,7 +92,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void IsSuccessfulStatusCode_ShouldExist()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, HttpStatusCode.OK);
+        OpResponse<object> subject = new TestOpResponse<object>(null, HttpStatusCode.OK);
 
         //act
         bool _ = subject.IsSuccessfulStatusCode();
@@ -104,7 +104,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void IsSuccessfulStatusCode_ShouldReturnTrueFor200()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, HttpStatusCode.OK);
+        OpResponse<object> subject = new TestOpResponse<object>(null, HttpStatusCode.OK);
 
         //act
         bool actual = subject.IsSuccessfulStatusCode();
@@ -117,7 +117,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void IsSuccessfulStatusCode_ShouldReturnTrueFor299()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, (HttpStatusCode)299);
+        OpResponse<object> subject = new TestOpResponse<object>(null, (HttpStatusCode)299);
 
         //act
         bool actual = subject.IsSuccessfulStatusCode();
@@ -130,7 +130,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void IsSuccessfulStatusCode_ShouldReturnFalseFor199()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, (HttpStatusCode)199);
+        OpResponse<object> subject = new TestOpResponse<object>(null, (HttpStatusCode)199);
 
         //act
         bool actual = subject.IsSuccessfulStatusCode();
@@ -143,7 +143,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void IsSuccessfulStatusCode_ShouldReturnFalseFor300()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, (HttpStatusCode)300);
+        OpResponse<object> subject = new TestOpResponse<object>(null, (HttpStatusCode)300);
 
         //act
         bool actual = subject.IsSuccessfulStatusCode();
@@ -156,7 +156,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void IsSuccessfulStatusCode_ShouldReturnFalseFor500()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, (HttpStatusCode)500);
+        OpResponse<object> subject = new TestOpResponse<object>(null, (HttpStatusCode)500);
 
         //act
         bool actual = subject.IsSuccessfulStatusCode();
@@ -169,7 +169,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void IsNotSuccessfulStatusCode_ShouldReturnTrueWhenSuccessIsFalse()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, (HttpStatusCode)500);
+        OpResponse<object> subject = new TestOpResponse<object>(null, (HttpStatusCode)500);
 
         //act
         bool actual = subject.IsNotSuccessfulStatusCode();
@@ -182,7 +182,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void IsNotSuccessfulStatusCode_ShouldReturnFalseWhenSuccessIsTrue()
     {
         //arrange
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(null, (HttpStatusCode)200);
+        OpResponse<object> subject = new TestOpResponse<object>(null, (HttpStatusCode)200);
 
         //act
         bool actual = subject.IsNotSuccessfulStatusCode();
@@ -195,10 +195,10 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     public void CosmosItemResponse_ShouldImplementAsSystemType()
     {
         //arrange
-        MethodInfo methodInfo = typeof(CosmosItemResponse<object>).GetMethod("AsSystemType");
+        MethodInfo methodInfo = typeof(OpResponse<object>).GetMethod("AsSystemType");
 
         //act
-        bool isOverride = methodInfo?.DeclaringType == typeof(CosmosItemResponse<object>);
+        bool isOverride = methodInfo?.DeclaringType == typeof(OpResponse<object>);
 
         //assert
         _ = isOverride.Should().BeTrue("CosmosItemResponse should implement the AsSystemType method from its superclass");
@@ -209,7 +209,7 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
     {
         //arrange
         object obj = new();
-        CosmosItemResponse<object> subject = new TestCosmosItemResponse<object>(obj, HttpStatusCode.OK);
+        OpResponse<object> subject = new TestOpResponse<object>(obj, HttpStatusCode.OK);
 
         //act
         object actual = subject.AsSystemType();
@@ -218,9 +218,9 @@ public sealed class CosmosItemResponseTests : BaseToSystemTypeTests<CosmosItemRe
         _ = actual.Should().BeSameAs(obj);
     }
 
-    private sealed class TestCosmosItemResponse<T> : CosmosItemResponse<T>
+    private sealed class TestOpResponse<T> : OpResponse<T>
     {
-        public TestCosmosItemResponse(T origin, HttpStatusCode status)
+        public TestOpResponse(T origin, HttpStatusCode status)
         {
             StatusCode = status;
             Value = origin;

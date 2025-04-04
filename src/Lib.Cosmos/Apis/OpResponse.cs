@@ -7,7 +7,7 @@ namespace Lib.Cosmos.Apis;
 /// Represents a response from a Cosmos DB item operation.
 /// </summary>
 /// <typeparam name="T">The type of the item.</typeparam>
-public abstract class CosmosItemResponse<T> : ToSystemType<T>
+public abstract class OpResponse<T> : ToSystemType<T>
 {
     /// <summary>
     /// Gets the value of the item.
