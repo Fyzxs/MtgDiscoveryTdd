@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Lib.Cosmos.Apis;
 using Lib.Cosmos.OpResponses;
@@ -17,7 +16,7 @@ public sealed class CosmosContainerUpsertAdapter : ICosmosContainerUpsertAdapter
         _logger = logger;
     }
 
-    public async Task<OpResponse<T>> UpsertItemAsync<T>([NotNull] Container container, T item)
+    public async Task<OpResponse<T>> UpsertItemAsync<T>(Container container, T item)
     {
         ItemResponse<T> itemResponse = await container.UpsertItemAsync(item).ConfigureAwait(false);
         _logger.UpsertInformation(itemResponse.RequestCharge, itemResponse.Diagnostics.GetClientElapsedTime());

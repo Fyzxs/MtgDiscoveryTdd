@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Lib.Cosmos.Apis;
 using Microsoft.Azure.Cosmos;
 
@@ -7,5 +6,5 @@ namespace Lib.Cosmos.Adapters;
 
 public interface ICosmosContainerUpsertAdapter
 {
-    Task<OpResponse<T>> UpsertItemAsync<T>([NotNull] Container container, T item);
+    Task<OpResponse<T>> UpsertItemAsync<T>(Container container, T item);
 }
