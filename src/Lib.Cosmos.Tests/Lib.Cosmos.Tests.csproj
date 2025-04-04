@@ -1,6 +1,7 @@
 ﻿<Project Sdk="MSTest.Sdk/3.8.3">
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Cosmos" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lib.Universal\Lib.Universal.csproj" />

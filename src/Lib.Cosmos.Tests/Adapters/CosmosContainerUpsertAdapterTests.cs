@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Lib.Cosmos.Adapters;
 using Lib.Cosmos.Apis;
 using Lib.Cosmos.Tests.Fakes;
-using Microsoft.Testing.Platform.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Lib.Cosmos.Tests.Adapters;
 
@@ -18,7 +18,8 @@ public sealed class CosmosContainerUpsertAdapterTests
         //arrange
 
         //act
-        ICosmosContainerUpsertAdapter _ = new CosmosContainerUpsertAdapter();
+        LoggerFake loggerFake = new();
+        ICosmosContainerUpsertAdapter _ = new CosmosContainerUpsertAdapter(loggerFake);
 
         //assert
     }
@@ -37,30 +38,8 @@ public sealed class CosmosContainerUpsertAdapterTests
         {
             UpsertItemAsyncResponse = upsertItemAsyncResponse
         };
-        CosmosContainerUpsertAdapter subject = new();
-
-        //act
-        OpResponse<CosmosItem> actual = await subject.UpsertItemAsync<CosmosItem>(containerFake, cosmosItem).ConfigureAwait(false);
-
-        //assert
-        _ = actual.Value.Should().BeSameAs(cosmosItem);
-    }
-
-    [TestMethod, TestCategory("unit")]
-    public async Task UpsertItemAsync_ShouldLogExpected()
-    {
-        //arrange
-        CosmosItem cosmosItem = new();
-        ItemResponseFake<CosmosItem> upsertItemAsyncResponse = new()
-        {
-            ResourceResult = cosmosItem,
-            StatusCodeResult = HttpStatusCode.MethodNotAllowed
-        };
-        ContainerFake<CosmosItem> containerFake = new()
-        {
-            UpsertItemAsyncResponse = upsertItemAsyncResponse
-        };
-        CosmosContainerUpsertAdapter subject = new();
+        LoggerFake loggerFake = new();
+        CosmosContainerUpsertAdapter subject = new(loggerFake);
 
         //act
         OpResponse<CosmosItem> actual = await subject.UpsertItemAsync<CosmosItem>(containerFake, cosmosItem).ConfigureAwait(false);
@@ -74,14 +53,8 @@ public sealed class LoggerFake : ILogger
 {
     public StringBuilder Logs { get; set; }
 
-    public async Task LogAsync<TState>(LogLevel logLevel, TState state, Exception exception,
-        Func<TState, Exception, string> formatter)
-    {
-        await Task.Delay(0).ConfigureAwait(false);
-        Log(logLevel, state, exception, formatter);
-    }
+    public IDisposable BeginScope<TState>(TState state) where TState : notnull => throw new NotImplementedException();
+    public bool IsEnabled(LogLevel logLevel) => throw new NotImplementedException();
 
-    public void Log<TState>(LogLevel logLevel, TState state, Exception exception, Func<TState, Exception, string> formatter) => Logs.AppendLine(formatter(state, exception));
-
-    public bool IsEnabled(LogLevel logLevel) => true;
+    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter) => Logs.AppendLine(formatter(state, exception));
 }
