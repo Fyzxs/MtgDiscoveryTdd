@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Cosmos;
@@ -9,10 +11,50 @@ using Microsoft.Azure.Cosmos.Scripts;
 
 namespace Lib.Cosmos.Tests.Fakes;
 
+public sealed class FeedIteratorFake<T> : FeedIterator<T>
+{
+    public FeedResponse<T> ReadNextAsyncResponse { get; init; }
+
+    private bool _hasReturned;
+
+    public override Task<FeedResponse<T>> ReadNextAsync(CancellationToken cancellationToken = default)
+    {
+        _hasReturned = true;
+        return Task.FromResult(ReadNextAsyncResponse);
+    }
+
+    public override bool HasMoreResults => _hasReturned is false;
+}
+
+public sealed class FeedResponseFake<T> : FeedResponse<T>
+{
+    private readonly Collection<T> _documents;
+    public FeedResponseFake(Collection<T> documents) => _documents = documents;
+
+    public double RequestChargeResult { get; init; }
+    public CosmosDiagnostics DiagnosticsResult { get; init; }
+
+    // ReSharper disable UnassignedGetOnlyAutoProperty
+    public override string ContinuationToken { get; }
+    public override int Count { get; }
+    public override string IndexMetrics { get; }
+    public override Headers Headers { get; }
+    public override IEnumerable<T> Resource => _documents;
+    public override HttpStatusCode StatusCode { get; }
+    public override double RequestCharge => RequestChargeResult;
+
+    public override CosmosDiagnostics Diagnostics => DiagnosticsResult;
+
+    public override IEnumerator<T> GetEnumerator() => new List<T>().GetEnumerator();
+    // ReSharper restore UnassignedGetOnlyAutoProperty
+}
+
 public sealed class ContainerFake<TType> : Container
 {
     public ItemResponse<TType> UpsertItemAsyncResponse { get; init; }
     public int UpsertItemAsyncInvokeCount { get; private set; }
+    public FeedIterator<TType> GetItemQueryIteratorResponse { get; init; }
+    public int GetItemQueryIteratorInvokeCount { get; private set; }
 
     public override Task<ItemResponse<T>> UpsertItemAsync<T>(T item, PartitionKey? partitionKey = null,
         ItemRequestOptions requestOptions = null,
@@ -20,6 +62,14 @@ public sealed class ContainerFake<TType> : Container
     {
         UpsertItemAsyncInvokeCount++;
         return Task.FromResult(UpsertItemAsyncResponse as ItemResponse<T>);
+    }
+
+    public override FeedIterator<T> GetItemQueryIterator<T>(QueryDefinition queryDefinition,
+        string continuationToken = null,
+        QueryRequestOptions requestOptions = null)
+    {
+        GetItemQueryIteratorInvokeCount++;
+        return GetItemQueryIteratorResponse as FeedIterator<T>;
     }
 
     #region Not Yet Used
@@ -111,10 +161,6 @@ public sealed class ContainerFake<TType> : Container
         throw new NotImplementedException();
 
     public override FeedIterator GetItemQueryStreamIterator(QueryDefinition queryDefinition, string continuationToken = null,
-        QueryRequestOptions requestOptions = null) =>
-        throw new NotImplementedException();
-
-    public override FeedIterator<T> GetItemQueryIterator<T>(QueryDefinition queryDefinition, string continuationToken = null,
         QueryRequestOptions requestOptions = null) =>
         throw new NotImplementedException();
 
