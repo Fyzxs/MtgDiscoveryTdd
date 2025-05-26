@@ -1,9 +1,8 @@
-﻿using Lib.Universal.Primitives;
-using Microsoft.Azure.Cosmos;
+﻿using Microsoft.Azure.Cosmos;
 
 namespace Lib.Cosmos.Primitives;
 
-public sealed class QueryString : ToSystemType<QueryDefinition>
+public sealed class QueryString : SimpleQueryDefinition
 {
     private readonly string _origin;
 
