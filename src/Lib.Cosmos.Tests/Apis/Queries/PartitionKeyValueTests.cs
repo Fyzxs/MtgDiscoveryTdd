@@ -5,4 +5,4 @@ using TestConvenience.Universal.Tests;
 namespace Lib.Cosmos.Tests.Apis.Queries;
 
 [TestClass]
-public sealed class PartitionKeyValueTests : BaseToSystemTypeTests<PartitionKey, PartitionKeyValue>;
+public sealed class PartitionKeyValueTests : BaseToSystemTypeTests<PartitionKeyValue, PartitionKey>;
