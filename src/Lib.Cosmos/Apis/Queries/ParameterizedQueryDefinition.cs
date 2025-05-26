@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Lib.Cosmos.Primitives;
 using Microsoft.Azure.Cosmos;
 
 namespace Lib.Cosmos.Apis.Queries;

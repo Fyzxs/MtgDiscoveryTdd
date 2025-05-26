@@ -1,5 +1,4 @@
 ﻿using Lib.Cosmos.Apis.Queries;
-using Lib.Cosmos.Primitives;
 using Microsoft.Azure.Cosmos;
 
 namespace Lib.Cosmos.Tests.Apis.Queries;

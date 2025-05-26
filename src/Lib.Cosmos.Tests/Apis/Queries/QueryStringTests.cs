@@ -1,8 +1,8 @@
-﻿using Lib.Cosmos.Primitives;
+﻿using Lib.Cosmos.Apis.Queries;
 using Lib.Universal.Primitives;
 using Microsoft.Azure.Cosmos;
 
-namespace Lib.Cosmos.Tests.Primitives;
+namespace Lib.Cosmos.Tests.Apis.Queries;
 
 [TestClass]
 public sealed class QueryStringTests
@@ -11,7 +11,7 @@ public sealed class QueryStringTests
     public void ShouldExist()
     {
         //arrange
-        ToSystemType<QueryDefinition> subject = new QueryString("My Query String");
+        SimpleQueryDefinition _ = new QueryString("My Query String");
 
         //act
 

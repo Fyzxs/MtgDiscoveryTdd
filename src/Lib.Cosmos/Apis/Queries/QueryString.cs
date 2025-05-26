@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Cosmos;
 
-namespace Lib.Cosmos.Primitives;
+namespace Lib.Cosmos.Apis.Queries;
 
 public sealed class QueryString : SimpleQueryDefinition
 {
