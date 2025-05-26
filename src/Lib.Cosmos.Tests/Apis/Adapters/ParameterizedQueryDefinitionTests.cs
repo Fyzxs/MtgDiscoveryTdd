@@ -1,4 +1,5 @@
-﻿using Lib.Universal.Primitives;
+﻿using Lib.Cosmos.Primitives;
+using Lib.Universal.Primitives;
 using Microsoft.Azure.Cosmos;
 
 namespace Lib.Cosmos.Tests.Apis.Adapters;
@@ -10,7 +11,19 @@ public class ParameterizedQueryDefinitionTests
     public void ShouldExist()
     {
         //arrange
-        ParameterizedQueryDefinition subject = new TestParameterizedQueryDefinition();
+        ParameterizedQueryDefinition _ = new TestParameterizedQueryDefinition();
+
+        //act
+
+        //assert
+    }
+
+    [TestMethod]
+    public void Ctor_ShouldTakeQueryDefinition()
+    {
+        //arrange
+        QueryString queryString = new("some string");
+        ParameterizedQueryDefinition subject = new TestParameterizedQueryDefinition(queryString);
 
         //act
 
@@ -19,6 +32,13 @@ public class ParameterizedQueryDefinitionTests
 
     private sealed class TestParameterizedQueryDefinition : ParameterizedQueryDefinition
     {
+        private readonly QueryString _queryString;
+
+        public TestParameterizedQueryDefinition(QueryString queryString)
+        {
+            _queryString = queryString;
+        }
+
         public override QueryDefinition AsSystemType() => throw new System.NotImplementedException();
     }
 }
