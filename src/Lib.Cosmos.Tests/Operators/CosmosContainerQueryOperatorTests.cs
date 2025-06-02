@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using FluentAssertions.Primitives;
 using Lib.Cosmos.Apis;
 using Lib.Cosmos.Apis.Operators;
-using Lib.Cosmos.Apis.Queries;
+using Lib.Cosmos.Apis.Primitives;
 using Lib.Cosmos.Operators;
 using Lib.Cosmos.Tests.Fakes;
 
-namespace Lib.Cosmos.Tests.Adapters;
+namespace Lib.Cosmos.Tests.Operators;
 
 [TestClass]
 public sealed class CosmosContainerQueryOperatorTests

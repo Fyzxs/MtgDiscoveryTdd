@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Cosmos;
 
-namespace Lib.Cosmos.Apis.Queries;
+namespace Lib.Cosmos.Apis.Primitives;
 
 public sealed class StringPartitionKeyValue : PartitionKeyValue
 {

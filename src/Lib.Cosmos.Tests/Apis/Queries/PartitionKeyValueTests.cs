@@ -1,4 +1,4 @@
-﻿using Lib.Cosmos.Apis.Queries;
+﻿using Lib.Cosmos.Apis.Primitives;
 using Microsoft.Azure.Cosmos;
 using TestConvenience.Universal.Tests;
 

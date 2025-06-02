@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lib.Cosmos.Apis;
 using Lib.Cosmos.Apis.Operators;
+using Lib.Cosmos.Apis.Operators.Items;
 using Lib.Cosmos.Apis.Operators.Responses;
 using Lib.Cosmos.OpResponses;
 using Microsoft.Azure.Cosmos;
@@ -20,7 +20,7 @@ public sealed class CosmosContainerReadItemOperator : ICosmosContainerReadItemOp
 
     public async Task<OpResponse<T>> ReadItemAsync<T>(Container container, ReadPointItem item)
     {
-        ItemResponse<T> itemResponse = await container.ReadItemAsync<T>(item.Id, item.AsPartitionKey()).ConfigureAwait(false);
+        ItemResponse<T> itemResponse = await container.ReadItemAsync<T>(item.Id, item.Partition).ConfigureAwait(false);
         _logger.ReadItemInformation(itemResponse.RequestCharge, itemResponse.Diagnostics.GetClientElapsedTime());
         return new ItemOpResponse<T>(itemResponse);
     }

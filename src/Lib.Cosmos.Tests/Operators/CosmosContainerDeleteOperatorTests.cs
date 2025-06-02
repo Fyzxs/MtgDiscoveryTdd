@@ -3,11 +3,13 @@ using System.Net;
 using System.Threading.Tasks;
 using Lib.Cosmos.Apis;
 using Lib.Cosmos.Apis.Operators;
+using Lib.Cosmos.Apis.Operators.Items;
 using Lib.Cosmos.Apis.Operators.Responses;
+using Lib.Cosmos.Apis.Primitives;
 using Lib.Cosmos.Operators;
 using Lib.Cosmos.Tests.Fakes;
 
-namespace Lib.Cosmos.Tests.Adapters;
+namespace Lib.Cosmos.Tests.Operators;
 
 [TestClass]
 public sealed class CosmosContainerDeleteOperatorTests
@@ -46,7 +48,13 @@ public sealed class CosmosContainerDeleteOperatorTests
         CosmosContainerDeleteOperator subject = new(loggerFake);
 
         //act
-        OpResponse<CosmosItem> actual = await subject.DeleteItemAsync<CosmosItem>(containerFake, new DeletePointItem()).ConfigureAwait(false);
+        OpResponse<CosmosItem> actual = await subject.DeleteItemAsync<CosmosItem>(containerFake,
+            new DeletePointItem()
+            {
+                Id = new StringCosmosItemId("ignored"),
+                Partition = new StringPartitionKeyValue("also_ignored")
+            }
+            ).ConfigureAwait(false);
 
         //assert
         _ = actual.Value.Should().BeSameAs(cosmosItem);
@@ -75,7 +83,11 @@ public sealed class CosmosContainerDeleteOperatorTests
         CosmosContainerDeleteOperator subject = new(loggerFake);
 
         //act
-        _ = await subject.DeleteItemAsync<CosmosItem>(containerFake, new DeletePointItem()).ConfigureAwait(false);
+        _ = await subject.DeleteItemAsync<CosmosItem>(containerFake, new DeletePointItem
+        {
+            Id = new StringCosmosItemId("ignored"),
+            Partition = new StringPartitionKeyValue("also_ignored")
+        }).ConfigureAwait(false);
 
         //assert
         _ = loggerFake.Logs.ToString().Should().Contain("DeleteItem cost: [RequestCharge=1234.56] [ElapsedTime=12:34:56]");
