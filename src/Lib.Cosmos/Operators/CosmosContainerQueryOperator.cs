@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Lib.Cosmos.Apis.Adapters;
+using Lib.Cosmos.Apis.Operators;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
 
-namespace Lib.Cosmos.Adapters;
+namespace Lib.Cosmos.Operators;
 
-internal sealed class CosmosContainerQueryAdapter : ICosmosContainerQueryAdapter
+internal sealed class CosmosContainerQueryOperator : ICosmosContainerQueryOperator
 {
     private readonly ILogger _logger;
 
-    public CosmosContainerQueryAdapter(ILogger logger)
+    public CosmosContainerQueryOperator(ILogger logger)
     {
         _logger = logger;
     }

@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions.Primitives;
-using Lib.Cosmos.Adapters;
 using Lib.Cosmos.Apis;
-using Lib.Cosmos.Apis.Adapters;
+using Lib.Cosmos.Apis.Operators;
 using Lib.Cosmos.Apis.Queries;
+using Lib.Cosmos.Operators;
 using Lib.Cosmos.Tests.Fakes;
 
 namespace Lib.Cosmos.Tests.Adapters;
 
 [TestClass]
-public sealed class CosmosContainerQueryAdapterTests
+public sealed class CosmosContainerQueryOperatorTests
 {
     [TestMethod, TestCategory("unit")]
     public void Should_Exist()
@@ -21,7 +21,7 @@ public sealed class CosmosContainerQueryAdapterTests
 
         //act
         LoggerFake loggerFake = new();
-        ICosmosContainerQueryAdapter _ = new CosmosContainerQueryAdapter(loggerFake);
+        ICosmosContainerQueryOperator _ = new CosmosContainerQueryOperator(loggerFake);
 
         //assert
     }
@@ -31,7 +31,7 @@ public sealed class CosmosContainerQueryAdapterTests
     {
         //arrange
         LoggerFake loggerFake = new();
-        CosmosContainerQueryAdapter subject = new(loggerFake);
+        CosmosContainerQueryOperator subject = new(loggerFake);
         FeedIteratorFake<CosmosItem> feedIteratorFake = new()
         {
             ReadNextAsyncResponse = new FeedResponseFake<CosmosItem>([new CosmosItem(), new CosmosItem(), new CosmosItem()])
@@ -51,10 +51,10 @@ public sealed class CosmosContainerQueryAdapterTests
         StringPartitionKeyValue partitionKeyValue = new("sample");
 
         //act
-        IEnumerable<CosmosItem> _ = await subject.QueryAsync<CosmosItem>(containerFake, queryDefinitionFake, partitionKeyValue).ConfigureAwait(false);
+        _ = await subject.QueryAsync<CosmosItem>(containerFake, queryDefinitionFake, partitionKeyValue).ConfigureAwait(false);
 
         //assert
-        containerFake.GetItemQueryIteratorInvokeCount.Should().Be(1);
+        _ = containerFake.GetItemQueryIteratorInvokeCount.Should().Be(1);
     }
 
     [TestMethod]
@@ -73,7 +73,7 @@ public sealed class CosmosContainerQueryAdapterTests
                 }
             }
         };
-        CosmosContainerQueryAdapter subject = new(loggerFake);
+        CosmosContainerQueryOperator subject = new(loggerFake);
         ContainerFake<CosmosItem> containerFake = new()
         {
             GetItemQueryIteratorResponse = feedIteratorFake
@@ -85,9 +85,9 @@ public sealed class CosmosContainerQueryAdapterTests
         IEnumerable<CosmosItem> actual = await subject.QueryAsync<CosmosItem>(containerFake, queryDefinitionFake, partitionKeyValue).ConfigureAwait(false);
 
         //assert
-        containerFake.GetItemQueryIteratorInvokeCount.Should().Be(1);
+        _ = containerFake.GetItemQueryIteratorInvokeCount.Should().Be(1);
         List<CosmosItem> actualList = actual.ToList();
-        actualList.Count.Should().Be(3);
+        _ = actualList.Count.Should().Be(3);
     }
 
     [TestMethod, TestCategory("unit")]
@@ -106,7 +106,7 @@ public sealed class CosmosContainerQueryAdapterTests
                 }
             }
         };
-        CosmosContainerQueryAdapter subject = new(loggerFake);
+        CosmosContainerQueryOperator subject = new(loggerFake);
         ContainerFake<CosmosItem> containerFake = new()
         {
             GetItemQueryIteratorResponse = feedIteratorFake

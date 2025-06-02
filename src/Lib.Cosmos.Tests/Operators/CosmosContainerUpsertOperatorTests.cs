@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using Lib.Cosmos.Adapters;
 using Lib.Cosmos.Apis;
-using Lib.Cosmos.Apis.Adapters;
-using Lib.Cosmos.Apis.OpResponses;
+using Lib.Cosmos.Apis.Operators;
+using Lib.Cosmos.Apis.Operators.Responses;
+using Lib.Cosmos.Operators;
 using Lib.Cosmos.Tests.Fakes;
-using Microsoft.Extensions.Logging;
 
 namespace Lib.Cosmos.Tests.Adapters;
 
 [TestClass]
-public sealed class CosmosContainerUpsertAdapterTests
+public sealed class CosmosContainerUpsertOperatorTests
 {
     [TestMethod, TestCategory("unit")]
     public void Should_Exist()
@@ -20,7 +19,7 @@ public sealed class CosmosContainerUpsertAdapterTests
 
         //act
         LoggerFake loggerFake = new();
-        ICosmosContainerUpsertAdapter _ = new CosmosContainerUpsertAdapter(loggerFake);
+        ICosmosContainerUpsertOperator _ = new CosmosContainerUpsertOperator(loggerFake);
 
         //assert
     }
@@ -45,7 +44,7 @@ public sealed class CosmosContainerUpsertAdapterTests
             UpsertItemAsyncResponse = upsertItemAsyncResponse
         };
         LoggerFake loggerFake = new();
-        CosmosContainerUpsertAdapter subject = new(loggerFake);
+        CosmosContainerUpsertOperator subject = new(loggerFake);
 
         //act
         OpResponse<CosmosItem> actual = await subject.UpsertItemAsync<CosmosItem>(containerFake, cosmosItem).ConfigureAwait(false);
@@ -74,7 +73,7 @@ public sealed class CosmosContainerUpsertAdapterTests
             UpsertItemAsyncResponse = upsertItemAsyncResponse
         };
         LoggerFake loggerFake = new();
-        CosmosContainerUpsertAdapter subject = new(loggerFake);
+        CosmosContainerUpsertOperator subject = new(loggerFake);
 
         //act
         _ = await subject.UpsertItemAsync<CosmosItem>(containerFake, cosmosItem).ConfigureAwait(false);

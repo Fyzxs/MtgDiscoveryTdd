@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using System.Reflection;
-using Lib.Cosmos.Apis.OpResponses;
+using Lib.Cosmos.Apis.Operators.Responses;
 using TestConvenience.Universal.Tests;
 
-namespace Lib.Cosmos.Tests.Apis.OpResponses;
+namespace Lib.Cosmos.Tests.Apis.Operators.Responses;
 
 [TestClass]
 public sealed class OpResponseTests : BaseToSystemTypeTests<OpResponse<object>, object>

@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lib.Cosmos.Apis;
-using Lib.Cosmos.Apis.Adapters;
-using Lib.Cosmos.Apis.OpResponses;
+using Lib.Cosmos.Apis.Operators;
+using Lib.Cosmos.Apis.Operators.Responses;
 using Lib.Cosmos.OpResponses;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
 
-namespace Lib.Cosmos.Adapters;
+namespace Lib.Cosmos.Operators;
 
-internal sealed class CosmosContainerDeleteAdapter : ICosmosContainerDeleteAdapter
+internal sealed class CosmosContainerDeleteOperator : ICosmosContainerDeleteOperator
 {
     private readonly ILogger _logger;
 
-    public CosmosContainerDeleteAdapter(ILogger logger) => _logger = logger;
+    public CosmosContainerDeleteOperator(ILogger logger) => _logger = logger;
 
     public async Task<OpResponse<T>> DeleteItemAsync<T>(Container container, DeletePointItem item)
     {

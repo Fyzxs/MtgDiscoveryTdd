@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
-using Lib.Cosmos.Apis.OpResponses;
+using Lib.Cosmos.Apis.Operators.Responses;
 using Microsoft.Azure.Cosmos;
 
-namespace Lib.Cosmos.Apis.Adapters;
+namespace Lib.Cosmos.Apis.Operators;
 
 /// <summary>
 /// Defines an adapter interface for upserting items into a Cosmos DB container.
 /// </summary>
-public interface ICosmosContainerUpsertAdapter
+public interface ICosmosContainerUpsertOperator
 {
     /// <summary>
     /// Upserts (inserts or updates) an item in the specified Cosmos DB container.

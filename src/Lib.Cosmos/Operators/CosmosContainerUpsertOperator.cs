@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lib.Cosmos.Apis.Adapters;
-using Lib.Cosmos.Apis.OpResponses;
+using Lib.Cosmos.Apis.Operators;
+using Lib.Cosmos.Apis.Operators.Responses;
 using Lib.Cosmos.OpResponses;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
 
-namespace Lib.Cosmos.Adapters;
+namespace Lib.Cosmos.Operators;
 
-internal sealed class CosmosContainerUpsertAdapter : ICosmosContainerUpsertAdapter
+internal sealed class CosmosContainerUpsertOperator : ICosmosContainerUpsertOperator
 {
     private readonly ILogger _logger;
 
-    public CosmosContainerUpsertAdapter(ILogger logger)
+    public CosmosContainerUpsertOperator(ILogger logger)
     {
         _logger = logger;
     }

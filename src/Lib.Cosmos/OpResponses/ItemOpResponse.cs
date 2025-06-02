@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using Lib.Cosmos.Apis.OpResponses;
+using Lib.Cosmos.Apis.Operators.Responses;
 using Microsoft.Azure.Cosmos;
 
 namespace Lib.Cosmos.OpResponses;

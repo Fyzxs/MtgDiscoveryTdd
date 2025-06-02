@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lib.Cosmos.Apis;
-using Lib.Cosmos.Apis.Adapters;
-using Lib.Cosmos.Apis.OpResponses;
+using Lib.Cosmos.Apis.Operators;
+using Lib.Cosmos.Apis.Operators.Responses;
 using Lib.Cosmos.OpResponses;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
 
-namespace Lib.Cosmos.Adapters;
+namespace Lib.Cosmos.Operators;
 
-public sealed class CosmosContainerReadItemAdapter : ICosmosContainerReadItemAdapter
+public sealed class CosmosContainerReadItemOperator : ICosmosContainerReadItemOperator
 {
     private readonly ILogger _logger;
 
-    public CosmosContainerReadItemAdapter(ILogger logger)
+    public CosmosContainerReadItemOperator(ILogger logger)
     {
         _logger = logger;
     }

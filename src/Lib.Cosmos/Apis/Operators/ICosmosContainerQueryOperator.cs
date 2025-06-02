@@ -3,12 +3,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Cosmos;
 
-namespace Lib.Cosmos.Apis.Adapters;
+namespace Lib.Cosmos.Apis.Operators;
 
 /// <summary>
 /// Defines an adapter interface for querying items from a Cosmos DB container.
 /// </summary>
-public interface ICosmosContainerQueryAdapter
+public interface ICosmosContainerQueryOperator
 {
     /// <summary>
     /// Executes a query against the specified Cosmos DB container and returns the results as an enumerable of type <typeparamref name="T"/>.
