@@ -11,22 +11,6 @@ using Microsoft.Extensions.Logging;
 namespace Lib.Cosmos.Tests.Adapters;
 
 [TestClass]
-public sealed class CosmosContainerDeleteAdapterTests
-{
-    [TestMethod, TestCategory("unit")]
-    public void Should_Exist()
-    {
-        //arrange
-
-        //act
-        LoggerFake loggerFake = new();
-        ICosmosContainerDeleteAdapter _ = new CosmosContainerDeleteAdapter(loggerFake);
-
-        //assert
-    }
-}
-
-[TestClass]
 public sealed class CosmosContainerUpsertAdapterTests
 {
     [TestMethod, TestCategory("unit")]
