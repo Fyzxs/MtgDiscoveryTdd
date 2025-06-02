@@ -15,11 +15,11 @@ internal sealed class CosmosContainerDeleteAdapter : ICosmosContainerDeleteAdapt
 
     public CosmosContainerDeleteAdapter(ILogger logger) => _logger = logger;
 
-    public async Task<OpResponse<T>> DeleteItemAsync<T>(Container container, CosmosItem cosmosItem)
+    public async Task<OpResponse<T>> DeleteItemAsync<T>(Container container, T item) where T : CosmosItem
     {
-        await Task.Delay(0).ConfigureAwait(false);
+        ItemResponse<T> itemResponse = await container.DeleteItemAsync<T>(item.Id, new PartitionKey(item.Partition)).ConfigureAwait(false);
         _logger.DeleteInformation(1234.56, new TimeSpan(0, 12, 34, 56));
-        return new ItemOpResponse<T>(null);
+        return new ItemOpResponse<T>(itemResponse);
     }
 }
 

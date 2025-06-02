@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Lib.Cosmos.Adapters;
 using Lib.Cosmos.Apis;
 using Lib.Cosmos.Apis.Adapters;
+using Lib.Cosmos.Apis.OpResponses;
 using Lib.Cosmos.Tests.Fakes;
 
 namespace Lib.Cosmos.Tests.Adapters;
@@ -21,6 +22,34 @@ public sealed class CosmosContainerDeleteAdapterTests
         ICosmosContainerDeleteAdapter _ = new CosmosContainerDeleteAdapter(loggerFake);
 
         //assert
+    }
+    [TestMethod, TestCategory("unit")]
+    public async Task DeleteItemAsync_ShouldCallUpsertItemAsyncOnContainer()
+    {
+        //arrange
+        CosmosItem cosmosItem = new();
+        ItemResponseFake<CosmosItem> upsertItemAsyncResponse = new()
+        {
+            ResourceResult = cosmosItem,
+            StatusCodeResult = HttpStatusCode.MethodNotAllowed,
+            RequestChargeResult = 1234.56,
+            DiagnosticsResult = new CosmosDiagnosticsFake()
+            {
+                GetClientElapsedTimeResult = new TimeSpan(0, 12, 34, 56)
+            }
+        };
+        ContainerFake<CosmosItem> containerFake = new()
+        {
+            DeleteItemAsyncResponse = upsertItemAsyncResponse
+        };
+        LoggerFake loggerFake = new();
+        CosmosContainerDeleteAdapter subject = new(loggerFake);
+
+        //act
+        OpResponse<CosmosItem> actual = await subject.DeleteItemAsync<CosmosItem>(containerFake, cosmosItem).ConfigureAwait(false);
+
+        //assert
+        _ = actual.Value.Should().BeSameAs(cosmosItem);
     }
 
     [TestMethod, TestCategory("unit")]
