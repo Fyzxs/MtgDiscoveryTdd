@@ -23,7 +23,7 @@ internal sealed class CosmosContainerDeleteAdapter : ICosmosContainerDeleteAdapt
     }
 }
 
-internal static partial class CosmosContainerUpsertAdapterLoggerExtensions
+internal static partial class CosmosContainerDeleteAdapterLoggerExtensions
 {
     [LoggerMessage(
         Level = LogLevel.Information,
