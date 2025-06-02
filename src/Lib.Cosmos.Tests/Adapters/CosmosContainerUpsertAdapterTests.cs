@@ -6,8 +6,36 @@ using Lib.Cosmos.Apis;
 using Lib.Cosmos.Apis.Adapters;
 using Lib.Cosmos.Apis.OpResponses;
 using Lib.Cosmos.Tests.Fakes;
+using Microsoft.Extensions.Logging;
 
 namespace Lib.Cosmos.Tests.Adapters;
+
+[TestClass]
+public sealed class CosmosContainerDeleteAdapterTests
+{
+    [TestMethod, TestCategory("unit")]
+    public void Should_Exist()
+    {
+        //arrange
+
+        //act
+        LoggerFake loggerFake = new();
+        ICosmosContainerDeleteAdapter _ = new CosmosContainerDeleteAdapter(loggerFake);
+
+        //assert
+    }
+}
+
+internal interface ICosmosContainerDeleteAdapter
+{
+}
+
+internal sealed class CosmosContainerDeleteAdapter : ICosmosContainerDeleteAdapter
+{
+    private readonly ILogger _logger;
+
+    public CosmosContainerDeleteAdapter(ILogger logger) => _logger = logger;
+}
 
 [TestClass]
 public sealed class CosmosContainerUpsertAdapterTests
