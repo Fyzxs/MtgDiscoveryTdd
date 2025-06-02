@@ -69,7 +69,7 @@ public sealed class CosmosContainerDeleteAdapterTests
         };
         ContainerFake<CosmosItem> containerFake = new()
         {
-            UpsertItemAsyncResponse = upsertItemAsyncResponse
+            DeleteItemAsyncResponse = upsertItemAsyncResponse
         };
         LoggerFake loggerFake = new();
         CosmosContainerDeleteAdapter subject = new(loggerFake);

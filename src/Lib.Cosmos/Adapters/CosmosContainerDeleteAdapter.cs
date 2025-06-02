@@ -18,7 +18,7 @@ internal sealed class CosmosContainerDeleteAdapter : ICosmosContainerDeleteAdapt
     public async Task<OpResponse<T>> DeleteItemAsync<T>(Container container, T item) where T : CosmosItem
     {
         ItemResponse<T> itemResponse = await container.DeleteItemAsync<T>(item.Id, new PartitionKey(item.Partition)).ConfigureAwait(false);
-        _logger.DeleteInformation(1234.56, new TimeSpan(0, 12, 34, 56));
+        _logger.DeleteInformation(itemResponse.RequestCharge, itemResponse.Diagnostics.GetClientElapsedTime());
         return new ItemOpResponse<T>(itemResponse);
     }
 }
