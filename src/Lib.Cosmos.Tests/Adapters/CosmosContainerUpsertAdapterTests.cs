@@ -26,17 +26,6 @@ public sealed class CosmosContainerDeleteAdapterTests
     }
 }
 
-internal interface ICosmosContainerDeleteAdapter
-{
-}
-
-internal sealed class CosmosContainerDeleteAdapter : ICosmosContainerDeleteAdapter
-{
-    private readonly ILogger _logger;
-
-    public CosmosContainerDeleteAdapter(ILogger logger) => _logger = logger;
-}
-
 [TestClass]
 public sealed class CosmosContainerUpsertAdapterTests
 {
