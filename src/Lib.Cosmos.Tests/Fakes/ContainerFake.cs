@@ -53,8 +53,12 @@ public sealed class ContainerFake<TType> : Container
 {
     public ItemResponse<TType> UpsertItemAsyncResponse { get; init; }
     public int UpsertItemAsyncInvokeCount { get; private set; }
+
     public ItemResponse<TType> DeleteItemAsyncResponse { get; init; }
     public int DeleteItemAsyncInvokeCount { get; private set; }
+
+    public ItemResponse<TType> ReadItemAsyncResponse { get; init; }
+    public int ReadItemAsyncInvokeCount { get; private set; }
 
     public FeedIterator<TType> GetItemQueryIteratorResponse { get; init; }
     public int GetItemQueryIteratorInvokeCount { get; private set; }
@@ -81,6 +85,13 @@ public sealed class ContainerFake<TType> : Container
     {
         DeleteItemAsyncInvokeCount++;
         return Task.FromResult(DeleteItemAsyncResponse as ItemResponse<T>);
+    }
+
+    public override Task<ItemResponse<T>> ReadItemAsync<T>(string id, PartitionKey partitionKey, ItemRequestOptions requestOptions = null,
+        CancellationToken cancellationToken = new CancellationToken())
+    {
+        ReadItemAsyncInvokeCount++;
+        return Task.FromResult(ReadItemAsyncResponse as ItemResponse<T>);
     }
 
     #region Not Yet Used
@@ -129,10 +140,6 @@ public sealed class ContainerFake<TType> : Container
         throw new NotImplementedException();
 
     public override Task<ResponseMessage> ReadItemStreamAsync(string id, PartitionKey partitionKey, ItemRequestOptions requestOptions = null,
-        CancellationToken cancellationToken = new CancellationToken()) =>
-        throw new NotImplementedException();
-
-    public override Task<ItemResponse<T>> ReadItemAsync<T>(string id, PartitionKey partitionKey, ItemRequestOptions requestOptions = null,
         CancellationToken cancellationToken = new CancellationToken()) =>
         throw new NotImplementedException();
 

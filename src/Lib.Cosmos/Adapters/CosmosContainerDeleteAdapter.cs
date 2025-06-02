@@ -15,9 +15,9 @@ internal sealed class CosmosContainerDeleteAdapter : ICosmosContainerDeleteAdapt
 
     public CosmosContainerDeleteAdapter(ILogger logger) => _logger = logger;
 
-    public async Task<OpResponse<T>> DeleteItemAsync<T>(Container container, T item) where T : CosmosItem
+    public async Task<OpResponse<T>> DeleteItemAsync<T>(Container container, DeletePointItem item)
     {
-        ItemResponse<T> itemResponse = await container.DeleteItemAsync<T>(item.Id, new PartitionKey(item.Partition)).ConfigureAwait(false);
+        ItemResponse<T> itemResponse = await container.DeleteItemAsync<T>(item.Id, item.AsPartitionKey()).ConfigureAwait(false);
         _logger.DeleteInformation(itemResponse.RequestCharge, itemResponse.Diagnostics.GetClientElapsedTime());
         return new ItemOpResponse<T>(itemResponse);
     }
@@ -31,4 +31,3 @@ internal static partial class CosmosContainerDeleteAdapterLoggerExtensions
     ]
     public static partial void DeleteInformation(this ILogger logger, double requestCharge, TimeSpan elapsedTime);
 }
-

@@ -10,7 +10,7 @@ using Lib.Cosmos.Tests.Fakes;
 namespace Lib.Cosmos.Tests.Adapters;
 
 [TestClass]
-public sealed class CosmosContainerDeleteAdapterTests
+public sealed class CosmosContainerReadItemAdapterTests
 {
     [TestMethod, TestCategory("unit")]
     public void Should_Exist()
@@ -19,16 +19,17 @@ public sealed class CosmosContainerDeleteAdapterTests
 
         //act
         LoggerFake loggerFake = new();
-        ICosmosContainerDeleteAdapter _ = new CosmosContainerDeleteAdapter(loggerFake);
+        ICosmosContainerReadItemAdapter _ = new CosmosContainerReadItemAdapter(loggerFake);
 
         //assert
     }
+
     [TestMethod, TestCategory("unit")]
-    public async Task DeleteItemAsync_ShouldCallUpsertItemAsyncOnContainer()
+    public async Task ReadItemAsync_ShouldCallReadItemAsyncOnContainerAsync()
     {
         //arrange
         CosmosItem cosmosItem = new();
-        ItemResponseFake<CosmosItem> upsertItemAsyncResponse = new()
+        ItemResponseFake<CosmosItem> readItemAsyncResponse = new()
         {
             ResourceResult = cosmosItem,
             StatusCodeResult = HttpStatusCode.MethodNotAllowed,
@@ -40,24 +41,24 @@ public sealed class CosmosContainerDeleteAdapterTests
         };
         ContainerFake<CosmosItem> containerFake = new()
         {
-            DeleteItemAsyncResponse = upsertItemAsyncResponse
+            ReadItemAsyncResponse = readItemAsyncResponse
         };
         LoggerFake loggerFake = new();
-        CosmosContainerDeleteAdapter subject = new(loggerFake);
+        CosmosContainerReadItemAdapter subject = new(loggerFake);
 
         //act
-        OpResponse<CosmosItem> actual = await subject.DeleteItemAsync<CosmosItem>(containerFake, new DeletePointItem()).ConfigureAwait(false);
+        OpResponse<CosmosItem> actual = await subject.ReadItemAsync<CosmosItem>(containerFake, new ReadPointItem()).ConfigureAwait(false);
 
         //assert
         _ = actual.Value.Should().BeSameAs(cosmosItem);
     }
 
     [TestMethod, TestCategory("unit")]
-    public async Task DeleteItemAsync_ShouldLogExpected()
+    public void ReadItemAsync_ShouldLogExpected()
     {
         //arrange
         CosmosItem cosmosItem = new();
-        ItemResponseFake<CosmosItem> upsertItemAsyncResponse = new()
+        ItemResponseFake<CosmosItem> readItemAsyncResponse = new()
         {
             ResourceResult = cosmosItem,
             StatusCodeResult = HttpStatusCode.MethodNotAllowed,
@@ -69,15 +70,15 @@ public sealed class CosmosContainerDeleteAdapterTests
         };
         ContainerFake<CosmosItem> containerFake = new()
         {
-            DeleteItemAsyncResponse = upsertItemAsyncResponse
+            ReadItemAsyncResponse = readItemAsyncResponse
         };
         LoggerFake loggerFake = new();
-        CosmosContainerDeleteAdapter subject = new(loggerFake);
+        CosmosContainerReadItemAdapter subject = new(loggerFake);
 
         //act
-        _ = await subject.DeleteItemAsync<CosmosItem>(containerFake, new DeletePointItem()).ConfigureAwait(false);
+        _ = subject.ReadItemAsync<CosmosItem>(containerFake, new ReadPointItem());
 
         //assert
-        _ = loggerFake.Logs.ToString().Should().Contain("DeleteItem cost: [RequestCharge=1234.56] [ElapsedTime=12:34:56]");
+        _ = loggerFake.Logs.ToString().Should().Contain("ReadItem cost: [RequestCharge=1234.56] [ElapsedTime=12:34:56]");
     }
 }
