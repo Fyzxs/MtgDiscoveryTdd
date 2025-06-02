@@ -20,3 +20,4 @@ public interface ICosmosContainerQueryAdapter
     /// <param name="cancellationToken">A token to observe while waiting for the task to complete.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains an enumerable of items of type <typeparamref name="T"/>.</returns>
     Task<IEnumerable<T>> QueryAsync<T>(Container container, QueryDefinition queryDefinition, PartitionKey partitionKey, CancellationToken cancellationToken = default);
+}
