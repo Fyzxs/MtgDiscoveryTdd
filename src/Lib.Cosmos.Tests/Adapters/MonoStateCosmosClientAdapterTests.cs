@@ -102,9 +102,9 @@ public sealed class MonoStateCosmosClientAdapterTests
         MonoStateCosmosClientAdapter subject = new(factoryFake);
         CosmosDatabaseNameFake databaseNameFake = new("test-db");
         CosmosCollectionNameFake collectionNameFake = new("test-collection");
+        Container firstResult = subject.GetContainer(databaseNameFake, collectionNameFake);
 
         //act
-        Container firstResult = subject.GetContainer(databaseNameFake, collectionNameFake);
         Container secondResult = subject.GetContainer(databaseNameFake, collectionNameFake);
 
         //assert
