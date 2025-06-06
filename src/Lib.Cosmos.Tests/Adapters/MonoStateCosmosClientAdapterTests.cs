@@ -91,7 +91,11 @@ public sealed class MonoStateCosmosClientAdapterTests
     public void GetContainer_ShouldUseSameInstanceForMultipleCalls()
     {
         //arrange
-        CosmosClientAdapterFake clientAdapterFake = new();
+        Container expectedContainer = null;
+        CosmosClientAdapterFake clientAdapterFake = new()
+        {
+            GetContainerResponse = expectedContainer
+        };
         CosmosClientAdapterFactoryFake factoryFake = new()
         {
             InstanceResponse = clientAdapterFake
@@ -101,11 +105,12 @@ public sealed class MonoStateCosmosClientAdapterTests
         CosmosCollectionNameFake collectionNameFake = new("test-collection");
 
         //act
-        _ = subject.GetContainer(databaseNameFake, collectionNameFake);
-        _ = subject.GetContainer(databaseNameFake, collectionNameFake);
+        Container firstResult = subject.GetContainer(databaseNameFake, collectionNameFake);
+        Container secondResult = subject.GetContainer(databaseNameFake, collectionNameFake);
 
         //assert
         _ = clientAdapterFake.GetContainerInvokeCount.Should().Be(2);
+        _ = firstResult.Should().BeSameAs(secondResult);
     }
 
     [TestMethod, TestCategory("unit")]
