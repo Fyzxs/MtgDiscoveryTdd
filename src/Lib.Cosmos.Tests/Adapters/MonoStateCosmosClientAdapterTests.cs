@@ -31,11 +31,11 @@ public sealed class MonoStateCosmosClientAdapterTests
             InstanceResponse = clientAdapterFake
         };
         MonoStateCosmosClientAdapter subject = new(factoryFake);
-        CosmosDatabaseNameFake databaseName = new("test-db");
-        CosmosCollectionNameFake collectionName = new("test-collection");
+        CosmosDatabaseNameFake databaseNameFake = new("test-db");
+        CosmosCollectionNameFake collectionNameFake = new("test-collection");
 
         //act
-        _ = subject.GetContainer(databaseName, collectionName);
+        _ = subject.GetContainer(databaseNameFake, collectionNameFake);
 
         //assert
         _ = factoryFake.InstanceInvokeCount.Should().Be(1);
@@ -55,11 +55,11 @@ public sealed class MonoStateCosmosClientAdapterTests
             InstanceResponse = clientAdapterFake
         };
         MonoStateCosmosClientAdapter subject = new(factoryFake);
-        CosmosDatabaseNameFake databaseName = new("test-db");
-        CosmosCollectionNameFake collectionName = new("test-collection");
+        CosmosDatabaseNameFake databaseNameFake = new("test-db");
+        CosmosCollectionNameFake collectionNameFake = new("test-collection");
 
         //act
-        Container actual = subject.GetContainer(databaseName, collectionName);
+        Container actual = subject.GetContainer(databaseNameFake, collectionNameFake);
 
         //assert
         _ = clientAdapterFake.GetContainerInvokeCount.Should().Be(1);
@@ -76,12 +76,12 @@ public sealed class MonoStateCosmosClientAdapterTests
             InstanceResponse = clientAdapterFake
         };
         MonoStateCosmosClientAdapter subject = new(factoryFake);
-        CosmosDatabaseNameFake databaseName = new("test-db");
-        CosmosCollectionNameFake collectionName = new("test-collection");
+        CosmosDatabaseNameFake databaseNameFake = new("test-db");
+        CosmosCollectionNameFake collectionNameFake = new("test-collection");
 
         //act
-        _ = subject.GetContainer(databaseName, collectionName);
-        _ = subject.GetContainer(databaseName, collectionName);
+        _ = subject.GetContainer(databaseNameFake, collectionNameFake);
+        _ = subject.GetContainer(databaseNameFake, collectionNameFake);
 
         //assert
         _ = factoryFake.InstanceInvokeCount.Should().Be(1);
@@ -97,12 +97,12 @@ public sealed class MonoStateCosmosClientAdapterTests
             InstanceResponse = clientAdapterFake
         };
         MonoStateCosmosClientAdapter subject = new(factoryFake);
-        CosmosDatabaseNameFake databaseName = new("test-db");
-        CosmosCollectionNameFake collectionName = new("test-collection");
+        CosmosDatabaseNameFake databaseNameFake = new("test-db");
+        CosmosCollectionNameFake collectionNameFake = new("test-collection");
 
         //act
-        _ = subject.GetContainer(databaseName, collectionName);
-        _ = subject.GetContainer(databaseName, collectionName);
+        _ = subject.GetContainer(databaseNameFake, collectionNameFake);
+        _ = subject.GetContainer(databaseNameFake, collectionNameFake);
 
         //assert
         _ = clientAdapterFake.GetContainerInvokeCount.Should().Be(2);
@@ -119,12 +119,12 @@ public sealed class MonoStateCosmosClientAdapterTests
         };
         MonoStateCosmosClientAdapter subject1 = new(factoryFake);
         MonoStateCosmosClientAdapter subject2 = new(factoryFake);
-        CosmosDatabaseNameFake databaseName = new("test-db");
-        CosmosCollectionNameFake collectionName = new("test-collection");
+        CosmosDatabaseNameFake databaseNameFake = new("test-db");
+        CosmosCollectionNameFake collectionNameFake = new("test-collection");
 
         //act
-        _ = subject1.GetContainer(databaseName, collectionName);
-        _ = subject2.GetContainer(databaseName, collectionName);
+        _ = subject1.GetContainer(databaseNameFake, collectionNameFake);
+        _ = subject2.GetContainer(databaseNameFake, collectionNameFake);
 
         //assert
         _ = factoryFake.InstanceInvokeCount.Should().Be(1);
