@@ -31,8 +31,8 @@ public sealed class MonoStateCosmosClientAdapterTests
             InstanceResponse = clientAdapterFake
         };
         MonoStateCosmosClientAdapter subject = new(factoryFake);
-        TestCosmosDatabaseName databaseName = new("test-db");
-        TestCosmosCollectionName collectionName = new("test-collection");
+        CosmosDatabaseNameFake databaseName = new("test-db");
+        CosmosCollectionNameFake collectionName = new("test-collection");
 
         //act
         _ = subject.GetContainer(databaseName, collectionName);
@@ -55,8 +55,8 @@ public sealed class MonoStateCosmosClientAdapterTests
             InstanceResponse = clientAdapterFake
         };
         MonoStateCosmosClientAdapter subject = new(factoryFake);
-        TestCosmosDatabaseName databaseName = new("test-db");
-        TestCosmosCollectionName collectionName = new("test-collection");
+        CosmosDatabaseNameFake databaseName = new("test-db");
+        CosmosCollectionNameFake collectionName = new("test-collection");
 
         //act
         Container actual = subject.GetContainer(databaseName, collectionName);
@@ -78,8 +78,8 @@ public sealed class MonoStateCosmosClientAdapterTests
             InstanceResponse = clientAdapterFake
         };
         MonoStateCosmosClientAdapter subject = new(factoryFake);
-        TestCosmosDatabaseName databaseName = new("test-db");
-        TestCosmosCollectionName collectionName = new("test-collection");
+        CosmosDatabaseNameFake databaseName = new("test-db");
+        CosmosCollectionNameFake collectionName = new("test-collection");
 
         //act
         _ = subject.GetContainer(databaseName, collectionName);
@@ -99,8 +99,8 @@ public sealed class MonoStateCosmosClientAdapterTests
             InstanceResponse = clientAdapterFake
         };
         MonoStateCosmosClientAdapter subject = new(factoryFake);
-        TestCosmosDatabaseName databaseName = new("test-db");
-        TestCosmosCollectionName collectionName = new("test-collection");
+        CosmosDatabaseNameFake databaseName = new("test-db");
+        CosmosCollectionNameFake collectionName = new("test-collection");
 
         //act
         _ = subject.GetContainer(databaseName, collectionName);
@@ -121,8 +121,8 @@ public sealed class MonoStateCosmosClientAdapterTests
         };
         MonoStateCosmosClientAdapter subject1 = new(factoryFake);
         MonoStateCosmosClientAdapter subject2 = new(factoryFake);
-        TestCosmosDatabaseName databaseName = new("test-db");
-        TestCosmosCollectionName collectionName = new("test-collection");
+        CosmosDatabaseNameFake databaseName = new("test-db");
+        CosmosCollectionNameFake collectionName = new("test-collection");
 
         //act
         _ = subject1.GetContainer(databaseName, collectionName);
