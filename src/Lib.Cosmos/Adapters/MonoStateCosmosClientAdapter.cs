@@ -14,6 +14,20 @@ public sealed class MonoStateCosmosClientAdapter : ICosmosClientAdapter
 
     public MonoStateCosmosClientAdapter(ICosmosClientAdapterFactory factory) => _factory = factory;
 
+    // Internal method for testing purposes to reset static state
+    internal static void ResetForTesting()
+    {
+        s_semaphore.Wait();
+        try
+        {
+            s_adapter = null;
+        }
+        finally
+        {
+            _ = s_semaphore.Release();
+        }
+    }
+
     private ICosmosClientAdapter MonoState()
     {
         if (s_adapter is not null) return s_adapter;
