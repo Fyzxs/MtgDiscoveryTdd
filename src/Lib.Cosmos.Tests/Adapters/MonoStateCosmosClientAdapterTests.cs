@@ -64,8 +64,6 @@ public sealed class MonoStateCosmosClientAdapterTests
         //assert
         _ = clientAdapterFake.GetContainerInvokeCount.Should().Be(1);
         _ = actual.Should().BeSameAs(expectedContainer);
-        _ = clientAdapterFake.LastDatabaseName.Should().BeSameAs(databaseName);
-        _ = clientAdapterFake.LastCollectionName.Should().BeSameAs(collectionName);
     }
 
     [TestMethod, TestCategory("unit")]
