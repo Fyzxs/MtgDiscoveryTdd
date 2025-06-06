@@ -1,4 +1,3 @@
-using System.Reflection;
 using Lib.Cosmos.Adapters;
 using Lib.Cosmos.Apis.Adapters;
 using Lib.Cosmos.Tests.Fakes;
@@ -134,13 +133,5 @@ public sealed class MonoStateCosmosClientAdapterTests
         //assert
         _ = factoryFake.InstanceInvokeCount.Should().Be(1);
         _ = clientAdapterFake.GetContainerInvokeCount.Should().Be(2);
-    }
-
-    [TestCleanup]
-    public void TestCleanup()
-    {
-        // Reset the static state for clean tests
-        FieldInfo staticField = typeof(MonoStateCosmosClientAdapter).GetField("s_adapter", BindingFlags.NonPublic | BindingFlags.Static);
-        staticField?.SetValue(null, null);
     }
 }
