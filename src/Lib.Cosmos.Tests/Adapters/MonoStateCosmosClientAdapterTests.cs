@@ -12,6 +12,7 @@ public sealed class MonoStateCosmosClientAdapterTests
     public void Should_Exist()
     {
         //arrange
+        MonoStateCosmosClientAdapter.ResetForTesting();
 
         //act
         CosmosClientAdapterFactoryFake factoryFake = new();
@@ -24,6 +25,7 @@ public sealed class MonoStateCosmosClientAdapterTests
     public void GetContainer_ShouldCallFactoryInstance_WhenFirstCall()
     {
         //arrange
+        MonoStateCosmosClientAdapter.ResetForTesting();
         CosmosClientAdapterFake clientAdapterFake = new();
         CosmosClientAdapterFactoryFake factoryFake = new()
         {
@@ -44,6 +46,7 @@ public sealed class MonoStateCosmosClientAdapterTests
     public void GetContainer_ShouldCallGetContainerOnAdapter()
     {
         //arrange
+        MonoStateCosmosClientAdapter.ResetForTesting();
         Container expectedContainer = null;
         CosmosClientAdapterFake clientAdapterFake = new()
         {
@@ -69,6 +72,7 @@ public sealed class MonoStateCosmosClientAdapterTests
     public void GetContainer_ShouldNotCallFactoryInstance_WhenSecondCall()
     {
         //arrange
+        MonoStateCosmosClientAdapter.ResetForTesting();
         CosmosClientAdapterFake clientAdapterFake = new();
         CosmosClientAdapterFactoryFake factoryFake = new()
         {
@@ -90,6 +94,7 @@ public sealed class MonoStateCosmosClientAdapterTests
     public void GetContainer_ShouldUseSameInstanceForMultipleCalls()
     {
         //arrange
+        MonoStateCosmosClientAdapter.ResetForTesting();
         Container expectedContainer = null;
         CosmosClientAdapterFake clientAdapterFake = new()
         {
@@ -116,6 +121,7 @@ public sealed class MonoStateCosmosClientAdapterTests
     public void GetContainer_ShouldShareStateBetweenInstances()
     {
         //arrange
+        MonoStateCosmosClientAdapter.ResetForTesting();
         CosmosClientAdapterFake clientAdapterFake = new();
         CosmosClientAdapterFactoryFake factoryFake = new()
         {
