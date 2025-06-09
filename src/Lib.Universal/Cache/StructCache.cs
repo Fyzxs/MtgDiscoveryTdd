@@ -22,5 +22,9 @@ public sealed class StructCache<T> : ICacheAsync<T> where T : struct
         _hasCachedValue = true;
     }
 
-    public Task Clear() => Task.Run(() => _hasCachedValue = false);
+    public Task Clear()
+    {
+        _hasCachedValue = false;
+        return Task.CompletedTask;
+    }
 }

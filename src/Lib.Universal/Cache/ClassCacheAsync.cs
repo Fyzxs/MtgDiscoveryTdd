@@ -9,7 +9,11 @@ public sealed class ClassCacheAsync<T> : ICacheAsync<T> where T : class
 
     public async Task<T> Retrieve(Func<Task<T>> func) => _cache ??= await func().ConfigureAwait(false);
 
-    public Task Clear() => Task.Run(() => _cache = null);
+    public Task Clear()
+    {
+        _cache = null;
+        return Task.CompletedTask;
+    }
 }
 
 public sealed class ClassCache<T> : ICache<T> where T : class
