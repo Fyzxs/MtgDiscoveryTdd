@@ -15,8 +15,7 @@ public sealed class MonoStateCosmosClientAdapter : ICosmosClientAdapter
 
     private ICosmosClientAdapter GetOrCreateAdapter(CosmosAccountName accountName)
     {
-        string accountKey = accountName.AsSystemType();
-        return s_adapters.GetOrAdd(accountKey, _ => _factory.Instance(accountName));
+        return s_adapters.GetOrAdd(accountName, _ => _factory.Instance(accountName));
     }
 
     public Container GetContainer(CosmosAccountName accountName, CosmosDatabaseName databaseName, CosmosCollectionName collectionName) => GetOrCreateAdapter(accountName).GetContainer(accountName, databaseName, collectionName);
