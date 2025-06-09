@@ -13,11 +13,11 @@ public sealed class MonoStateCosmosClientAdapter : ICosmosClientAdapter
 
     public MonoStateCosmosClientAdapter(ICosmosClientAdapterFactory factory) => _factory = factory;
 
-    private ICosmosClientAdapter MonoState(CosmosAccountName accountName)
+    private ICosmosClientAdapter GetOrCreateAdapter(CosmosAccountName accountName)
     {
         string accountKey = accountName.AsSystemType();
         return s_adapters.GetOrAdd(accountKey, _ => _factory.Instance(accountName));
     }
 
-    public Container GetContainer(CosmosAccountName accountName, CosmosDatabaseName databaseName, CosmosCollectionName collectionName) => MonoState(accountName).GetContainer(accountName, databaseName, collectionName);
+    public Container GetContainer(CosmosAccountName accountName, CosmosDatabaseName databaseName, CosmosCollectionName collectionName) => GetOrCreateAdapter(accountName).GetContainer(accountName, databaseName, collectionName);
 }
