@@ -5,7 +5,7 @@ using Microsoft.Azure.Cosmos;
 
 namespace Lib.Cosmos.Tests.Adapters;
 
-[TestClass]
+[TestClass, DoNotParallelize]
 public sealed class MonoStateCosmosClientAdapterTests
 {
     [TestMethod, TestCategory("unit")]
