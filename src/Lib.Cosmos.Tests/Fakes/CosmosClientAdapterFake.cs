@@ -8,10 +8,12 @@ public sealed class CosmosClientAdapterFake : ICosmosClientAdapter
 {
     public Container GetContainerResponse { get; init; }
     public int GetContainerInvokeCount { get; private set; }
+    public CosmosAccountName LastAccountName { get; private set; }
 
-    public Container GetContainer(CosmosDatabaseName databaseName, CosmosCollectionName collectionName)
+    public Container GetContainer(CosmosAccountName accountName, CosmosDatabaseName databaseName, CosmosCollectionName collectionName)
     {
         GetContainerInvokeCount++;
+        LastAccountName = accountName;
         return GetContainerResponse;
     }
 }
