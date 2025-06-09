@@ -1,9 +1,31 @@
 using Lib.Cosmos.Adapters;
 using Lib.Cosmos.Apis.Adapters;
+using Lib.Cosmos.Apis.Ids;
 using Lib.Cosmos.Tests.Fakes;
 using Microsoft.Azure.Cosmos;
 
 namespace Lib.Cosmos.Tests.Adapters;
+
+internal sealed class TestCosmosClientAdapterFactory : ICosmosClientAdapterFactory
+{
+    private readonly ICosmosClientAdapter _adapter1;
+    private readonly ICosmosClientAdapter _adapter2;
+    private int _callCount;
+
+    public TestCosmosClientAdapterFactory(ICosmosClientAdapter adapter1, ICosmosClientAdapter adapter2)
+    {
+        _adapter1 = adapter1;
+        _adapter2 = adapter2;
+    }
+
+    public int InstanceInvokeCount => _callCount;
+
+    public ICosmosClientAdapter Instance(CosmosAccountName accountName)
+    {
+        _callCount++;
+        return _callCount == 1 ? _adapter1 : _adapter2;
+    }
+}
 
 [TestClass]
 public sealed class MonoStateCosmosClientAdapterTests
@@ -143,11 +165,18 @@ public sealed class MonoStateCosmosClientAdapterTests
     public void GetContainer_ShouldCreateSeparateAdaptersForDifferentAccounts()
     {
         //arrange
-        CosmosClientAdapterFake clientAdapterFake = new();
-        CosmosClientAdapterFactoryFake factoryFake = new()
+        ContainerFake<object> containerFake1 = new();
+        ContainerFake<object> containerFake2 = new();
+        CosmosClientAdapterFake clientAdapterFake1 = new()
         {
-            InstanceResponse = clientAdapterFake
+            GetContainerResponse = containerFake1
         };
+        CosmosClientAdapterFake clientAdapterFake2 = new()
+        {
+            GetContainerResponse = containerFake2
+        };
+
+        TestCosmosClientAdapterFactory factoryFake = new(clientAdapterFake1, clientAdapterFake2);
         MonoStateCosmosClientAdapter subject = new(factoryFake);
         CosmosAccountNameFake accountNameFake1 = new("test-account-6a");
         CosmosAccountNameFake accountNameFake2 = new("test-account-6b");
@@ -155,11 +184,13 @@ public sealed class MonoStateCosmosClientAdapterTests
         CosmosCollectionNameFake collectionNameFake = new("test-collection");
 
         //act
-        _ = subject.GetContainer(accountNameFake1, databaseNameFake, collectionNameFake);
-        _ = subject.GetContainer(accountNameFake2, databaseNameFake, collectionNameFake);
+        Container result1 = subject.GetContainer(accountNameFake1, databaseNameFake, collectionNameFake);
+        Container result2 = subject.GetContainer(accountNameFake2, databaseNameFake, collectionNameFake);
 
         //assert
         _ = factoryFake.InstanceInvokeCount.Should().Be(2);
-        _ = clientAdapterFake.GetContainerInvokeCount.Should().Be(2);
+        _ = clientAdapterFake1.GetContainerInvokeCount.Should().Be(1);
+        _ = clientAdapterFake2.GetContainerInvokeCount.Should().Be(1);
+        _ = result1.Should().NotBeSameAs(result2);
     }
 }
