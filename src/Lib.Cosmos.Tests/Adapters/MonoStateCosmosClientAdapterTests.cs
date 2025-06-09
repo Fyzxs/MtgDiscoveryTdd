@@ -47,10 +47,10 @@ public sealed class MonoStateCosmosClientAdapterTests
     {
         //arrange
         MonoStateCosmosClientAdapter.ResetForTesting();
-        Container expectedContainer = null;
+        ContainerFake<object> containerFake = new();
         CosmosClientAdapterFake clientAdapterFake = new()
         {
-            GetContainerResponse = expectedContainer
+            GetContainerResponse = containerFake
         };
         CosmosClientAdapterFactoryFake factoryFake = new()
         {
@@ -65,7 +65,7 @@ public sealed class MonoStateCosmosClientAdapterTests
 
         //assert
         _ = clientAdapterFake.GetContainerInvokeCount.Should().Be(1);
-        _ = actual.Should().BeSameAs(expectedContainer);
+        _ = actual.Should().BeSameAs(containerFake);
     }
 
     [TestMethod, TestCategory("unit")]
@@ -95,10 +95,10 @@ public sealed class MonoStateCosmosClientAdapterTests
     {
         //arrange
         MonoStateCosmosClientAdapter.ResetForTesting();
-        Container expectedContainer = null;
+        ContainerFake<object> containerFake = new();
         CosmosClientAdapterFake clientAdapterFake = new()
         {
-            GetContainerResponse = expectedContainer
+            GetContainerResponse = containerFake
         };
         CosmosClientAdapterFactoryFake factoryFake = new()
         {
