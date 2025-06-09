@@ -45,7 +45,11 @@ public sealed class MonoStateCosmosClientAdapterTests
     public void GetContainer_ShouldCallFactoryInstance_WhenFirstCall()
     {
         //arrange
-        CosmosClientAdapterFake clientAdapterFake = new();
+        ContainerFake<object> containerFake = new();
+        CosmosClientAdapterFake clientAdapterFake = new()
+        {
+            GetContainerResponse = containerFake
+        };
         CosmosClientAdapterFactoryFake factoryFake = new()
         {
             InstanceResponse = clientAdapterFake
@@ -56,10 +60,11 @@ public sealed class MonoStateCosmosClientAdapterTests
         CosmosCollectionNameFake collectionNameFake = new("test-collection");
 
         //act
-        _ = subject.GetContainer(accountNameFake, databaseNameFake, collectionNameFake);
+        Container actual = subject.GetContainer(accountNameFake, databaseNameFake, collectionNameFake);
 
         //assert
         _ = factoryFake.InstanceInvokeCount.Should().Be(1);
+        _ = actual.Should().BeSameAs(containerFake);
     }
 
     [TestMethod, TestCategory("unit")]
@@ -92,7 +97,11 @@ public sealed class MonoStateCosmosClientAdapterTests
     public void GetContainer_ShouldNotCallFactoryInstance_WhenSecondCall()
     {
         //arrange
-        CosmosClientAdapterFake clientAdapterFake = new();
+        ContainerFake<object> containerFake = new();
+        CosmosClientAdapterFake clientAdapterFake = new()
+        {
+            GetContainerResponse = containerFake
+        };
         CosmosClientAdapterFactoryFake factoryFake = new()
         {
             InstanceResponse = clientAdapterFake
@@ -101,13 +110,15 @@ public sealed class MonoStateCosmosClientAdapterTests
         CosmosAccountNameFake accountNameFake = new("test-account-3");
         CosmosDatabaseNameFake databaseNameFake = new("test-db");
         CosmosCollectionNameFake collectionNameFake = new("test-collection");
-        _ = subject.GetContainer(accountNameFake, databaseNameFake, collectionNameFake);
+        Container firstResult = subject.GetContainer(accountNameFake, databaseNameFake, collectionNameFake);
 
         //act
-        _ = subject.GetContainer(accountNameFake, databaseNameFake, collectionNameFake);
+        Container secondResult = subject.GetContainer(accountNameFake, databaseNameFake, collectionNameFake);
 
         //assert
         _ = factoryFake.InstanceInvokeCount.Should().Be(1);
+        _ = firstResult.Should().BeSameAs(containerFake);
+        _ = secondResult.Should().BeSameAs(containerFake);
     }
 
     [TestMethod, TestCategory("unit")]
@@ -135,13 +146,19 @@ public sealed class MonoStateCosmosClientAdapterTests
         //assert
         _ = clientAdapterFake.GetContainerInvokeCount.Should().Be(2);
         _ = firstResult.Should().BeSameAs(secondResult);
+        _ = firstResult.Should().BeSameAs(containerFake);
+        _ = secondResult.Should().BeSameAs(containerFake);
     }
 
     [TestMethod, TestCategory("unit")]
     public void GetContainer_ShouldShareStateBetweenInstances()
     {
         //arrange
-        CosmosClientAdapterFake clientAdapterFake = new();
+        ContainerFake<object> containerFake = new();
+        CosmosClientAdapterFake clientAdapterFake = new()
+        {
+            GetContainerResponse = containerFake
+        };
         CosmosClientAdapterFactoryFake factoryFake = new()
         {
             InstanceResponse = clientAdapterFake
@@ -151,14 +168,16 @@ public sealed class MonoStateCosmosClientAdapterTests
         CosmosAccountNameFake accountNameFake = new("test-account-5");
         CosmosDatabaseNameFake databaseNameFake = new("test-db");
         CosmosCollectionNameFake collectionNameFake = new("test-collection");
-        _ = subject1.GetContainer(accountNameFake, databaseNameFake, collectionNameFake);
+        Container firstResult = subject1.GetContainer(accountNameFake, databaseNameFake, collectionNameFake);
 
         //act
-        _ = subject2.GetContainer(accountNameFake, databaseNameFake, collectionNameFake);
+        Container secondResult = subject2.GetContainer(accountNameFake, databaseNameFake, collectionNameFake);
 
         //assert
         _ = factoryFake.InstanceInvokeCount.Should().Be(1);
         _ = clientAdapterFake.GetContainerInvokeCount.Should().Be(2);
+        _ = firstResult.Should().BeSameAs(containerFake);
+        _ = secondResult.Should().BeSameAs(containerFake);
     }
 
     [TestMethod, TestCategory("unit")]
@@ -192,5 +211,7 @@ public sealed class MonoStateCosmosClientAdapterTests
         _ = clientAdapterFake1.GetContainerInvokeCount.Should().Be(1);
         _ = clientAdapterFake2.GetContainerInvokeCount.Should().Be(1);
         _ = result1.Should().NotBeSameAs(result2);
+        _ = result1.Should().BeSameAs(containerFake1);
+        _ = result2.Should().BeSameAs(containerFake2);
     }
 }
