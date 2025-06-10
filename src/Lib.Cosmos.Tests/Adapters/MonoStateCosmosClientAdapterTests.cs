@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using Lib.Cosmos.Adapters;
 using Lib.Cosmos.Apis.Adapters;
 using Lib.Cosmos.Apis.Ids;
+using Lib.Cosmos.Apis.Operators.Responses;
 using Lib.Cosmos.Tests.Fakes;
 using Microsoft.Azure.Cosmos;
 
@@ -213,5 +215,63 @@ public sealed class MonoStateCosmosClientAdapterTests
         _ = result1.Should().NotBeSameAs(result2);
         _ = result1.Should().BeSameAs(containerFake1);
         _ = result2.Should().BeSameAs(containerFake2);
+    }
+
+    [TestMethod, TestCategory("unit")]
+    public async Task CreateDatabaseIfNotExistsAsync_ShouldCallFactoryInstance_WhenFirstCall()
+    {
+        //arrange
+        DatabaseOpResponseFake databaseOpResponseFake = new()
+        {
+            ValueToReturn = null // Database is not the focus of this test, just delegation
+        };
+        CosmosClientAdapterFake clientAdapterFake = new()
+        {
+            CreateDatabaseIfNotExistsAsyncResponse = databaseOpResponseFake
+        };
+        CosmosClientAdapterFactoryFake factoryFake = new()
+        {
+            InstanceResponse = clientAdapterFake
+        };
+        MonoStateCosmosClientAdapter subject = new(factoryFake);
+        CosmosAccountNameFake accountNameFake = new("test-account-create-db-1");
+        CosmosDatabaseNameFake databaseNameFake = new("test-db");
+
+        //act
+        OpResponse<Database> actual = await subject.CreateDatabaseIfNotExistsAsync(accountNameFake, databaseNameFake).ConfigureAwait(false);
+
+        //assert
+        _ = factoryFake.InstanceInvokeCount.Should().Be(1);
+        _ = actual.Should().BeSameAs(databaseOpResponseFake);
+    }
+
+    [TestMethod, TestCategory("unit")]
+    public async Task CreateDatabaseIfNotExistsAsync_ShouldCallCreateDatabaseIfNotExistsAsyncOnAdapter()
+    {
+        //arrange
+        DatabaseOpResponseFake databaseOpResponseFake = new()
+        {
+            ValueToReturn = null // Database is not the focus of this test, just delegation
+        };
+        CosmosClientAdapterFake clientAdapterFake = new()
+        {
+            CreateDatabaseIfNotExistsAsyncResponse = databaseOpResponseFake
+        };
+        CosmosClientAdapterFactoryFake factoryFake = new()
+        {
+            InstanceResponse = clientAdapterFake
+        };
+        MonoStateCosmosClientAdapter subject = new(factoryFake);
+        CosmosAccountNameFake accountNameFake = new("test-account-create-db-2");
+        CosmosDatabaseNameFake databaseNameFake = new("test-db");
+
+        //act
+        OpResponse<Database> actual = await subject.CreateDatabaseIfNotExistsAsync(accountNameFake, databaseNameFake).ConfigureAwait(false);
+
+        //assert
+        _ = clientAdapterFake.CreateDatabaseIfNotExistsAsyncInvokeCount.Should().Be(1);
+        _ = clientAdapterFake.LastAccountName.Should().BeSameAs(accountNameFake);
+        _ = clientAdapterFake.LastDatabaseName.Should().BeSameAs(databaseNameFake);
+        _ = actual.Should().BeSameAs(databaseOpResponseFake);
     }
 }

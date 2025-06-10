@@ -1,6 +1,8 @@
 ﻿using System.Collections.Concurrent;
+using System.Threading.Tasks;
 using Lib.Cosmos.Apis.Adapters;
 using Lib.Cosmos.Apis.Ids;
+using Lib.Cosmos.Apis.Operators.Responses;
 using Microsoft.Azure.Cosmos;
 
 namespace Lib.Cosmos.Adapters;
@@ -19,4 +21,6 @@ public sealed class MonoStateCosmosClientAdapter : ICosmosClientAdapter
     }
 
     public Container GetContainer(CosmosAccountName accountName, CosmosDatabaseName databaseName, CosmosCollectionName collectionName) => GetOrCreateAdapter(accountName).GetContainer(accountName, databaseName, collectionName);
+
+    public Task<OpResponse<Database>> CreateDatabaseIfNotExistsAsync(CosmosAccountName accountName, CosmosDatabaseName databaseName) => GetOrCreateAdapter(accountName).CreateDatabaseIfNotExistsAsync(accountName, databaseName);
 }
