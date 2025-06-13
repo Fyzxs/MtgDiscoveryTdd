@@ -1,5 +1,6 @@
 ﻿<Project Sdk="MSTest.Sdk/3.8.3">
   <ItemGroup>
+    <PackageReference Include="HotChocolate" />
     <PackageReference Include="Microsoft.Azure.Cosmos" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
   </ItemGroup>
