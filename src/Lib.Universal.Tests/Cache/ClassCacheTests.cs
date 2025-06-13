@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Lib.Universal.Cache;
 
 namespace Lib.Universal.Tests.Cache;

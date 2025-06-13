@@ -1,4 +1,4 @@
-using Lib.Cosmos.Adapters;
+﻿using Lib.Cosmos.Adapters;
 using Lib.Cosmos.Apis.Adapters;
 using Lib.Cosmos.Apis.Ids;
 using Lib.Cosmos.Tests.Fakes;
