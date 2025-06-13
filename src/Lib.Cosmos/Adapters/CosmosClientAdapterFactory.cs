@@ -1,4 +1,5 @@
-﻿using Lib.Cosmos.Apis.Adapters;
+﻿using System;
+using Lib.Cosmos.Apis.Adapters;
 using Lib.Cosmos.Apis.Ids;
 using Microsoft.Azure.Cosmos;
 
@@ -9,7 +10,13 @@ public sealed class CosmosClientAdapterFactory : ICosmosClientAdapterFactory
     public ICosmosClientAdapter Instance(CosmosAccountName accountName)
     {
         string endpoint = $"https://{accountName}.documents.azure.com:443/";
-        string key = "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==";
+        string key = Environment.GetEnvironmentVariable("COSMOS_DB_KEY");
+
+        if (string.IsNullOrEmpty(key))
+        {
+            throw new InvalidOperationException("COSMOS_DB_KEY environment variable is required but not set.");
+        }
+
         CosmosClient cosmosClient = new(endpoint, key);
 
         return new CosmosClientAdapter(cosmosClient);

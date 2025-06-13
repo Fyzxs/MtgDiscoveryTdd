@@ -1,3 +1,4 @@
+using System;
 using Lib.Cosmos.Adapters;
 using Lib.Cosmos.Apis.Adapters;
 using Lib.Cosmos.Tests.Fakes;
@@ -7,6 +8,19 @@ namespace Lib.Cosmos.Tests.Adapters;
 [TestClass]
 public sealed class CosmosClientAdapterFactoryTests
 {
+    private const string TestCosmosKey = "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==";
+
+    [TestInitialize]
+    public void Setup()
+    {
+        Environment.SetEnvironmentVariable("COSMOS_DB_KEY", TestCosmosKey);
+    }
+
+    [TestCleanup]
+    public void Cleanup()
+    {
+        Environment.SetEnvironmentVariable("COSMOS_DB_KEY", null);
+    }
     [TestMethod, TestCategory("unit")]
     public void Should_Exist()
     {
@@ -46,5 +60,21 @@ public sealed class CosmosClientAdapterFactoryTests
 
         //assert
         _ = actual1.Should().NotBeSameAs(actual2);
+    }
+
+    [TestMethod, TestCategory("unit")]
+    public void Instance_ShouldThrowWhenEnvironmentVariableNotSet()
+    {
+        //arrange
+        Environment.SetEnvironmentVariable("COSMOS_DB_KEY", null);
+        CosmosClientAdapterFactory subject = new();
+        CosmosAccountNameFake accountNameFake = new("test-account");
+
+        //act
+        Action act = () => subject.Instance(accountNameFake);
+
+        //assert
+        _ = act.Should().Throw<InvalidOperationException>()
+            .WithMessage("COSMOS_DB_KEY environment variable is required but not set.");
     }
 }
