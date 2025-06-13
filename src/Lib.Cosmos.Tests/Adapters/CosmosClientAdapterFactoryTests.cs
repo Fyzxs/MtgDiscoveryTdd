@@ -25,9 +25,10 @@ public sealed class CosmosClientAdapterFactoryTests
     public void Should_Exist()
     {
         //arrange
+        using LoggerFactoryFake loggerFactoryFake = new();
 
         //act
-        ICosmosClientAdapterFactory _ = new CosmosClientAdapterFactory();
+        ICosmosClientAdapterFactory _ = new CosmosClientAdapterFactory(loggerFactoryFake);
 
         //assert
     }
@@ -36,7 +37,8 @@ public sealed class CosmosClientAdapterFactoryTests
     public void Instance_ShouldReturnICosmosClientAdapter()
     {
         //arrange
-        CosmosClientAdapterFactory subject = new();
+        using LoggerFactoryFake loggerFactoryFake = new();
+        CosmosClientAdapterFactory subject = new(loggerFactoryFake);
         CosmosAccountNameFake accountNameFake = new("test-account");
 
         //act
@@ -51,7 +53,8 @@ public sealed class CosmosClientAdapterFactoryTests
     public void Instance_ShouldReturnDifferentInstancesForDifferentCalls()
     {
         //arrange
-        CosmosClientAdapterFactory subject = new();
+        using LoggerFactoryFake loggerFactoryFake = new();
+        CosmosClientAdapterFactory subject = new(loggerFactoryFake);
         CosmosAccountNameFake accountNameFake = new("test-account");
 
         //act
@@ -67,7 +70,8 @@ public sealed class CosmosClientAdapterFactoryTests
     {
         //arrange
         Environment.SetEnvironmentVariable("COSMOS_DB_KEY", null);
-        CosmosClientAdapterFactory subject = new();
+        using LoggerFactoryFake loggerFactoryFake = new();
+        CosmosClientAdapterFactory subject = new(loggerFactoryFake);
         CosmosAccountNameFake accountNameFake = new("test-account");
 
         //act
@@ -76,5 +80,25 @@ public sealed class CosmosClientAdapterFactoryTests
         //assert
         _ = act.Should().Throw<InvalidOperationException>()
             .WithMessage("COSMOS_DB_KEY environment variable is required but not set.");
+    }
+
+    [TestMethod, TestCategory("unit")]
+    public void Instance_ShouldLogInformationWhenCreatingInstance()
+    {
+        //arrange
+        using LoggerFactoryFake loggerFactoryFake = new();
+        LoggerFake factoryLogger = new();
+
+        // We need to modify the factory fake to return our specific logger for testing
+        using LoggerFactoryTestHelper loggerFactoryTestHelper = new(factoryLogger);
+        CosmosClientAdapterFactory subject = new(loggerFactoryTestHelper);
+        CosmosAccountNameFake accountNameFake = new("test-account");
+
+        //act
+        _ = subject.Instance(accountNameFake);
+
+        //assert
+        string logs = factoryLogger.Logs.ToString();
+        _ = logs.Should().Contain("Creating CosmosClientAdapter instance for account: [AccountName=test-account]");
     }
 }
