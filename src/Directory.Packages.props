@@ -2,6 +2,7 @@
   <ItemGroup>
     <PackageVersion Include="AwesomeAssertions" Version="8.0.2" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="HotChocolate" Version="14.0.0" />
     <PackageVersion Include="Microsoft.Azure.Cosmos" Version="3.48.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.3" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
