@@ -71,9 +71,6 @@
   <ItemGroup Condition="$(IsExampleCli)">
     <ProjectReference Include="..\Example.Core\Example.Core.csproj" />
   </ItemGroup>
-  <ItemGroup Condition="$(IsExampleCli)">
-    <PackageReference Include="Premera.VAP.DSI.Internal.UniversalCore" />
-  </ItemGroup>
 
   <PropertyGroup Condition="$(IsTestBuild)">
     <!-- IDE0060 - complaining about unused args -->
